@@ -172,9 +172,12 @@
   const modalIframe = document.getElementById('modalIframe');
   const modalCloseBtn = document.getElementById('modalClose');
 
-  function openModal(videoId) {
+  function openModal(videoId, title) {
     if (!modal || !modalIframe) return;
     modalIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+    const label = title ? `${title} — project video player` : 'Project video player';
+    modalIframe.title = label;
+    modal.setAttribute('aria-label', label);
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('modal-open');
@@ -194,7 +197,8 @@
     trigger.addEventListener('click', () => {
       const videoId = getYouTubeId(card.getAttribute('data-youtube'));
       if (!videoId) return; // no real link added yet — nothing to open
-      openModal(videoId);
+      const titleEl = card.querySelector('.card__info h3');
+      openModal(videoId, titleEl ? titleEl.textContent.trim() : '');
     });
   });
 

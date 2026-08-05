@@ -72,6 +72,8 @@
   </button>
 </header>
 
+<main>
+
 <!-- HERO -->
 <section class="hero" id="top">
   <div class="hero__frame-label">
@@ -83,7 +85,7 @@
   <h1 class="hero__title" data-reveal>
     <span class="line">YOUR</span>
     <span class="line">FOOTAGE.</span>
-    <span class="line hero__title--accent">MY MAGIC.<span class="hero__cursor">|</span></span>
+    <span class="line hero__title--accent">MY MAGIC.<span class="hero__cursor" aria-hidden="true">|</span></span>
   </h1>
 
   <div class="hero__meta">
@@ -106,6 +108,9 @@
       <svg width="14" height="20" viewBox="0 0 14 20" fill="none"><path d="M7 1V19M7 19L1 13M7 19L13 13" stroke="currentColor" stroke-width="1.5"/></svg>
     </a>
   </div>
+
+  <!-- Decorative vertical reel label (visual only — no edits needed) -->
+  <div class="hero__reel-tag" aria-hidden="true">REEL 001 — YOUR FOOTAGE. MY MAGIC. — REEL 001</div>
 
   <div class="hero__ticker" aria-hidden="true">
     <!-- These words describe your specialties. Edit the list if it changes. -->
@@ -171,7 +176,7 @@
     <!-- ============ PROJECT CARD 1 (copy this whole block to add another) ============ -->
     <!-- Replace this YouTube link -->
     <article class="card" data-reveal data-youtube="https://youtube.com/shorts/E6YNnSR42bk">
-      <button class="card__frame" type="button" aria-label="Play project video">
+      <button class="card__frame" type="button" aria-label="Play Healthy Fern project video">
         <span class="card__frame-bg" aria-hidden="true"></span>
         <span class="card__play">▶</span>
       </button>
@@ -189,7 +194,7 @@ A promotional commercial highlighting the bakery's fresh ingredients and healthy
     <!-- ============ PROJECT CARD 2 (copy this whole block to add another) ============ -->
     <!-- Replace this YouTube link -->
     <article class="card" data-reveal data-youtube="https://youtube.com/shorts/uIWWkeWGRTA?feature=share">
-      <button class="card__frame" type="button" aria-label="Play project video">
+      <button class="card__frame" type="button" aria-label="Play Dr. Ataa project video">
         <span class="card__frame-bg" aria-hidden="true"></span>
         <span class="card__play">▶</span>
       </button>
@@ -207,7 +212,7 @@ An educational short-form video explaining the differences between Damon braces 
     <!-- ============ PROJECT CARD 3 (copy this whole block to add another) ============ -->
     <!-- Replace this YouTube link -->
     <article class="card" data-youtube="https://youtube.com/shorts/2mILWVTiB0Q?feature=share">
-      <button class="card__frame" type="button" aria-label="Play project video">
+      <button class="card__frame" type="button" aria-label="Play TirTir Design project video">
         <span class="card__frame-bg" aria-hidden="true"></span>
         <span class="card__play">▶</span>
       </button>
@@ -225,7 +230,7 @@ A luxury furniture commercial showcasing a signature designer desk through cinem
     <!-- ============ PROJECT CARD 4 (copy this whole block to add another) ============ -->
     <!-- Replace this YouTube link -->
     <article class="card" data-reveal data-youtube="https://youtube.com/shorts/pqOoH9VRgW4?feature=share">
-      <button class="card__frame" type="button" aria-label="Play project video">
+      <button class="card__frame" type="button" aria-label="Play Don Chicko project video">
         <span class="card__frame-bg" aria-hidden="true"></span>
         <span class="card__play">▶</span>
       </button>
@@ -243,7 +248,7 @@ A cinematic restaurant commercial built around the creative concept of a missing
     <!-- ============ PROJECT CARD 5 (copy this whole block to add another) ============ -->
     <!-- Replace this YouTube link -->
     <article class="card" data-reveal data-youtube="https://youtube.com/shorts/thSXqg-XLUY?feature=share">
-      <button class="card__frame" type="button" aria-label="Play project video">
+      <button class="card__frame" type="button" aria-label="Play Heal Pilates project video">
         <span class="card__frame-bg" aria-hidden="true"></span>
         <span class="card__play">▶</span>
       </button>
@@ -261,7 +266,7 @@ A cinematic day-in-the-life commercial following a client's Pilates journey, cap
     <!-- ============ PROJECT CARD 6 (copy this whole block to add another) ============ -->
     <!-- Replace this YouTube link -->
     <article class="card" data-reveal data-youtube="https://youtube.com/shorts/vc7gsdFkNms?feature=share">
-      <button class="card__frame" type="button" aria-label="Play project video">
+      <button class="card__frame" type="button" aria-label="Play Vanilla Cosmetics project video">
         <span class="card__frame-bg" aria-hidden="true"></span>
         <span class="card__play">▶</span>
       </button>
@@ -279,7 +284,7 @@ A cinematic brand story tracing the journey of vanilla from its origins to its p
     <!-- ============ PROJECT CARD 7 (copy this whole block to add another) ============ -->
     <!-- Replace this YouTube link -->
     <article class="card" data-reveal data-youtube="https://youtu.be/gaB0KQ_1f5s">
-      <button class="card__frame" type="button" aria-label="Play project video">
+      <button class="card__frame" type="button" aria-label="Play OVO Café project video">
         <span class="card__frame-bg" aria-hidden="true"></span>
         <span class="card__play">▶</span>
       </button>
@@ -297,7 +302,7 @@ A cinematic brand film capturing the atmosphere, architecture, and artistic char
     <!-- ============ PROJECT CARD 8 (copy this whole block to add another) ============ -->
     <!-- Replace this YouTube link -->
     <article class="card" data-youtube="https://youtube.com/shorts/ed1l_F6n5Jc?feature=share">
-      <button class="card__frame" type="button" aria-label="Play project video">
+      <button class="card__frame" type="button" aria-label="Play Harrir project video">
         <span class="card__frame-bg" aria-hidden="true"></span>
         <span class="card__play">▶</span>
       </button>
@@ -514,6 +519,8 @@ rel="noopener">
 
   </div>
 </section>
+
+</main>
 
 <footer class="footer">
   <span>© <span id="year"></span> Fahad Sajad. All footage protected.</span>

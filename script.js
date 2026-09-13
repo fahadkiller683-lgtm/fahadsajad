@@ -164,10 +164,15 @@
     const videoId = getYouTubeId(link);
     if (!videoId) return; // still a placeholder — leave the fallback color in place
 
+    const thumbUrl = `url(https://img.youtube.com/vi/${videoId}/maxresdefault.jpg)`;
     const frameBg = card.querySelector('.card__frame-bg');
-    if (frameBg) {
-      frameBg.style.backgroundImage = `url(https://img.youtube.com/vi/${videoId}/maxresdefault.jpg)`;
-    }
+    if (frameBg) frameBg.style.backgroundImage = thumbUrl;
+
+    // A couple of cards (see .card--wipe in style.css) reveal color
+    // through a left-to-right wipe instead of the grayscale fade —
+    // both layers need the same real thumbnail set on them.
+    const revealBg = card.querySelector('.card__frame-bg--reveal');
+    if (revealBg) revealBg.style.backgroundImage = thumbUrl;
   });
 
   /* ---------- Video modal / lightbox ----------

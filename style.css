@@ -57,6 +57,48 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
   max-width:1400px;
   margin:0 auto;
 }
+
+/* ---------------- Per-section color grade ----------------
+   Each section carries a faint tonal wash pulled from the same
+   six-tone palette used for the project-card placeholders below
+   (see .card__frame-bg), so the page reads as a graded reel moving
+   through distinct looks — cool, warm, neutral, warm — instead of
+   one flat near-black background throughout. Full-bleed via the
+   standard break-out-of-centered-container trick: .section itself
+   stays max-width:1400px for content, this pseudo spans the
+   viewport behind it. */
+.reel::before,
+.work::before,
+.experience::before,
+.contact::before{
+  content:'';
+  position:absolute;
+  top:0; bottom:0; left:50%;
+  width:100vw;
+  transform:translateX(-50%);
+  z-index:-1;
+  pointer-events:none;
+}
+.reel::before{
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 0%, rgba(46,92,90,.20), transparent 70%),
+    var(--bg);
+}
+.work::before{
+  background:
+    radial-gradient(ellipse 75% 55% at 50% 100%, rgba(138,74,53,.16), transparent 70%),
+    var(--bg);
+}
+.experience::before{
+  background:
+    radial-gradient(ellipse 65% 60% at 0% 40%, rgba(72,80,94,.18), transparent 70%),
+    var(--bg);
+}
+.contact::before{
+  background:
+    radial-gradient(ellipse 85% 65% at 50% 100%, rgba(107,37,54,.24), transparent 70%),
+    var(--bg);
+}
 .section__tc{
   display:flex;
   align-items:center;
@@ -342,6 +384,7 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
   font-size:clamp(3.2rem,12vw,9rem);
   text-transform:uppercase;
   line-height:.86;
+  letter-spacing:-0.02em;
   display:flex;
   flex-direction:column;
 }
@@ -349,7 +392,14 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
   overflow:hidden;
   display:block;
 }
-.hero__title--accent{ color:var(--accent); }
+/* Onion-skin ghost frame, lifted from NLE preview scrubbing rather
+   than a flat fill — falls back cleanly to solid accent color in any
+   browser that ignores -webkit-text-stroke. */
+.hero__title--accent{
+  color:var(--accent);
+  -webkit-text-stroke:1.5px var(--accent);
+  -webkit-text-fill-color:transparent;
+}
 .hero__cursor{
   display:inline-block;
   animation:blink 1s step-end infinite;
@@ -550,6 +600,16 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
   box-shadow:0 28px 60px -18px rgba(0,0,0,.75);
   z-index:2;
 }
+/* One card breaks the grid — the cinematic-brand-film piece gets a
+   wider, landscape-framed slot instead of sitting in the vertical
+   social-clip rhythm as an equally-weighted ninth tile. */
+.card--feature{
+  grid-column:span 2;
+  max-width:none;
+}
+.card--feature .card__frame{
+  aspect-ratio:16/9;
+}
 .card::before,
 .card::after{
   content:'';
@@ -595,6 +655,25 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
 .card:focus-within .card__frame-bg{
   filter:grayscale(0) contrast(1.08);
   transform:scale(1.08);
+}
+/* A couple of cards (.card--wipe) reveal color with a left-to-right
+   cut instead of the grayscale fade every other tile uses, echoing
+   the scrubber's own fill direction — not all nine do the identical
+   move. The base layer stays desaturated always; a second full-color
+   layer sweeps in over it via clip-path on hover. */
+.card--wipe:hover .card__frame-bg,
+.card--wipe:focus-within .card__frame-bg{
+  filter:grayscale(1) contrast(1.05);
+  transform:none;
+}
+.card__frame-bg--reveal{
+  clip-path:inset(0 100% 0 0);
+  filter:none;
+  transition:clip-path .6s var(--ease);
+}
+.card--wipe:hover .card__frame-bg--reveal,
+.card--wipe:focus-within .card__frame-bg--reveal{
+  clip-path:inset(0 0 0 0);
 }
 /* Fallback colors shown until a real YouTube thumbnail loads in
    (script.js sets the thumbnail automatically once you add a link).
@@ -788,26 +867,71 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
   line-height:1.6;
 }
 
-/* ---------------- Services ---------------- */
+/* ---------------- Services ----------------
+   A stacked full-bleed list rather than the bordered card grid used
+   for Work — Services reads as a rundown, not another set of tiles,
+   so the page doesn't repeat the same container shape a third time.
+   The "04" backing numeral replaces the small mono kicker used on
+   every other section (see .services__num) as this section's own
+   volume beat. */
+.services__num{
+  position:absolute;
+  top:-1rem;
+  right:clamp(1.5rem,6vw,5rem);
+  font-family:var(--f-display);
+  font-size:clamp(9rem,26vw,22rem);
+  line-height:1;
+  color:var(--text);
+  opacity:.05;
+  pointer-events:none;
+  user-select:none;
+  z-index:0;
+}
 .services__grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  border-top:1px solid var(--line);
-  border-left:1px solid var(--line);
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+  margin-top:1rem;
 }
 .service{
-  padding:2.5rem 2rem;
-  border-right:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-  transition:background var(--dur-m) var(--ease);
+  position:relative;
+  display:grid;
+  grid-template-columns:56px 1fr;
+  grid-template-areas:
+    "icon title"
+    "icon desc";
+  align-items:start;
+  column-gap:1.75rem;
+  row-gap:.6rem;
+  padding:2rem 0;
+  border-top:1px solid var(--line);
+  transition:background var(--dur-m) var(--ease), padding-left var(--dur-m) var(--ease);
 }
-.service:hover{ background:var(--panel); }
+.service__icon{ grid-area:icon; }
+.service h3{ grid-area:title; }
+.service p{ grid-area:desc; }
+.services__grid .service:last-child{
+  border-bottom:1px solid var(--line);
+}
+.service::after{
+  content:'';
+  position:absolute;
+  top:-1px; left:0;
+  width:0; height:1px;
+  background:var(--accent);
+  transition:width var(--dur-m) var(--ease);
+}
+.service:hover{
+  background:var(--panel);
+  padding-left:1rem;
+}
+.service:hover::after{ width:100%; }
 .service__icon{
   display:flex;
   align-items:center;
   justify-content:center;
   width:42px; height:42px;
-  margin-bottom:1.5rem;
   color:var(--text-dim);
   transition:color var(--dur-m) var(--ease), transform var(--dur-m) var(--ease);
 }
@@ -826,12 +950,34 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
   margin-bottom:.6rem;
 }
 .service p{
+  max-width:56ch;
   color:var(--text-dim);
   font-size:.92rem;
   line-height:1.6;
 }
 
-/* ---------------- Contact ---------------- */
+/* ---------------- Contact ----------------
+   Plays quieter than every section before it — closing credits, not
+   another chapter opener. Right-aligned, smaller heading, tighter
+   vertical rhythm, so the page resolves down instead of holding the
+   same volume for five straight sections. */
+.contact{
+  padding-top:clamp(3.5rem,7vw,5.5rem);
+  text-align:right;
+}
+.contact .section__tc{
+  justify-content:flex-end;
+  flex-direction:row-reverse;
+}
+.contact .section__title{
+  font-size:clamp(1.9rem,4.2vw,2.9rem);
+  margin-left:auto;
+  max-width:16ch;
+}
+.contact .section__lede{
+  margin-left:auto;
+  margin-right:0;
+}
 .contact__list{
   display:grid;
   grid-template-columns:repeat(2,1fr);
@@ -839,6 +985,8 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
   background:var(--line);
   border:1px solid var(--line);
   max-width:820px;
+  margin-left:auto;
+  text-align:left;
 }
 .contact__item{
   display:flex;
@@ -914,6 +1062,13 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
 }
 
 @media (max-width:760px){
+  .card--feature{
+    grid-column:auto;
+    max-width:320px;
+  }
+  .card--feature .card__frame{
+    aspect-ratio:9/16;
+  }
   .nav__links{
     position:fixed;
     inset:0;

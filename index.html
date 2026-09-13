@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fahad Sajad — Video Editor</title>
 <meta name="description" content="Fahad Sajad is a professional video editor specializing in commercials, beauty content, social media, and cinematic storytelling.">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%230a0a09'/%3E%3Ccircle cx='16' cy='16' r='9' fill='%23e2372a'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ece5d3'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23a83c09' stroke-width='2.5'/%3E%3C/svg%3E">
 <!-- Add og:image + og:url once this is hosted on a real domain, for rich link previews -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Fahad Sajad — Video Editor">
@@ -16,123 +16,121 @@
 <meta name="twitter:description" content="Professional video editor specializing in commercials, beauty content, social media, and cinematic storytelling.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,500;0,600;1,500;1,600&family=Hanken+Grotesk:wght@400;500;600;700&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<!--
+  THESIS: The site is a working contact sheet, not a cinematic showreel
+  skin — it refuses the REC-dot/timecode/scrubber genre default this
+  exact redesign replaced.
+  OWN-WORLD: warm light-table cream (#ece5d3) and steel-dark ink,
+  grease-pencil burnt-orange (#a83c09) as the only review mark, Alegreya
+  italic display, Martian Mono for frame/spec data, Hanken Grotesk body.
+  STORY: an agency producer sees Fahad review his own range —
+  commercial, social, cinematic, motion — the way an editor reviews
+  contact-sheet frames, and reaches out convinced of that range.
+  FIRST VIEWPORT: the hero IS Sheet 001 — spine metadata and a single,
+  large-scale italic headline carry it alone; proof of range starts
+  one scroll later, in the Featured Cut and the format-tagged grid.
+  FORM: Contact Sheet / Light Table, candidate 5 of the grounded list,
+  seed key 6986406e; raised with the camcorder-HUD challenger's
+  full-chrome commitment and the split-flap challenger's per-character
+  cascade motion.
+  FINISH: unreviewed and undocumented is unfinished; this build ends
+  with the finish review, the verdict, DESIGN.md, and every shipping
+  raster carrying its provenance.
+-->
 
 <!-- ============================================================
      HOW THIS FILE IS ORGANIZED
      Every part you might want to edit has a comment right above
      it, like: <!- Replace this project title ->
-     Sections without a comment (nav, scrubber, loader, modal,
-     custom cursor, footer structure) are just layout/design and
-     effects — they work automatically and don't need edits.
+     Sections without a comment (spine, lightbar, loader, modal,
+     loupe cursor, footer structure) are layout/design and effects
+     — they work automatically and don't need edits.
      ============================================================ -->
 
-<!-- ============================================================
-     LOADING SCREEN (visual only — no edits needed)
-     Shows briefly while the page loads, then fades out on its own.
-     ============================================================ -->
+<!-- LOADING SCREEN (visual only — no edits needed) -->
 <div class="loader" id="loader" aria-hidden="true">
-  <span class="loader__mark">FS</span>
+  <span class="loader__mark">F·S</span>
   <div class="loader__bar"><span class="loader__bar-fill" id="loaderFill"></span></div>
   <span class="loader__tc" id="loaderTC">00%</span>
 </div>
 <noscript><style>.loader{ display:none; }</style></noscript>
 
-<!-- Custom cursor shown when hovering project cards (visual only — no edits needed) -->
-<div class="custom-cursor" id="customCursor" aria-hidden="true"><span>View</span></div>
+<!-- Loupe cursor shown when hovering project frames (visual only) -->
+<div class="loupe-cursor" id="customCursor" aria-hidden="true"></div>
 
-<!-- Film grain overlay (visual effect only, no edits needed) -->
+<!-- Paper grain (material texture, visual only) -->
 <div class="grain" aria-hidden="true"></div>
 
-<!-- Scroll timeline scrubber (visual effect only, no edits needed) -->
-<div class="scrubber" aria-hidden="true">
-  <div class="scrubber__track">
-    <div class="scrubber__fill" id="scrubberFill"></div>
-    <div class="scrubber__head" id="scrubberHead"></div>
-  </div>
-  <span class="scrubber__tc" id="scrubberTC">00:00:00:00</span>
-</div>
+<!-- Light bar — shows which sheet is in view (visual only) -->
+<div class="lightbar" aria-hidden="true"><span class="lightbar__window" id="scrubberHead"></span></div>
 
-<!-- NAV -->
-<header class="nav" id="nav">
+<!-- SPINE (nav) -->
+<header class="spine" id="nav">
   <!-- Replace this name if needed -->
-  <a href="#top" class="nav__logo">FAHAD<span>SAJAD</span></a>
-  <nav class="nav__links" id="navLinks">
-    <a href="#featured-project"><span class="nav__num">01</span>Project</a>
-    <a href="#work"><span class="nav__num">02</span>Work</a>
-    <a href="#experience"><span class="nav__num">03</span>Experience</a>
-    <a href="#services"><span class="nav__num">04</span>Services</a>
-    <a href="#contact"><span class="nav__num">05</span>Contact</a>
+  <a href="#top" class="spine__mark">FAHAD <em>SAJAD</em></a>
+  <nav class="spine__tabs" id="navLinks">
+    <a href="#featured-project" data-frame="01">Project</a>
+    <a href="#work" data-frame="02">Work</a>
+    <a href="#experience" data-frame="03">Experience</a>
+    <a href="#services" data-frame="04">Services</a>
+    <a href="#contact" data-frame="05">Contact</a>
   </nav>
-  <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+  <button class="spine__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
 </header>
 
 <main>
 
-<!-- HERO -->
-<section class="hero" id="top">
-  <div class="hero__frame-label">
-    <span>REC</span>
-    <span class="hero__dot"></span>
-    <span id="liveClock">00:00:00:00</span>
+<!-- SHEET 001 — HERO -->
+<section class="sheet hero" id="top">
+  <h1 class="hero__title" data-flip>The range is <span class="accent">already on the sheet.</span></h1>
+  <!-- Replace this intro line if you'd like to change how you're described -->
+  <p class="hero__role" data-reveal style="transition-delay:.1s">Video editor for agencies and their clients — commercials, beauty and social content, cinematic brand films, and motion graphics, all cut by one editor across the format a campaign actually needs.</p>
+  <a href="#work" class="hero__cta" data-reveal style="transition-delay:.18s">
+    <span>Review the Full Sheet</span>
+    <svg viewBox="0 0 14 14" fill="none"><path d="M1 7H13M13 7L8 2M13 7L8 12" stroke="currentColor" stroke-width="1.4"/></svg>
+  </a>
+  <div class="hero__strip" data-reveal style="transition-delay:.26s">
+    <span>Commercials</span>
+    <span>Social &amp; Beauty</span>
+    <span>Cinematic Brand Film</span>
+    <span>Motion Graphics</span>
+    <span>Longform</span>
   </div>
 
-  <h1 class="hero__title" data-reveal>
-    <span class="line">YOUR</span>
-    <span class="line">FOOTAGE.</span>
-    <span class="line hero__title--accent">MY MAGIC.<span class="hero__cursor" aria-hidden="true">|</span></span>
-  </h1>
-
-  <div class="hero__meta">
-    <div class="hero__meta-text" data-reveal style="transition-delay:.15s">
-      <!-- Replace this intro line if you'd like to change how you're described -->
-      <p class="hero__role">Professional Video Editor specializing in commercials, beauty content, social media, and cinematic storytelling.</p>
-
-      <!-- Main call-to-action button. Scrolls down to the Featured
-           Projects section. Edit the words inside <span> if you want
-           different button text — everything else works automatically. -->
-      <a href="#work" class="hero__cta">
-        <span class="hero__cta-text">Ready to See the Magic?</span>
-        <span class="hero__cta-arrow" aria-hidden="true">→</span>
-      </a>
-    </div>
-
-    <!-- Secondary link to the single Featured Project video above -->
-    <a href="#featured-project" class="hero__scroll" data-reveal style="transition-delay:.3s">
-      <span>Watch my work</span>
-      <svg width="14" height="20" viewBox="0 0 14 20" fill="none"><path d="M7 1V19M7 19L1 13M7 19L13 13" stroke="currentColor" stroke-width="1.5"/></svg>
-    </a>
-  </div>
-
-  <!-- Decorative vertical reel label (visual only — no edits needed) -->
-  <div class="hero__reel-tag" aria-hidden="true">REEL 001 — YOUR FOOTAGE. MY MAGIC. — REEL 001</div>
-
-  <div class="hero__ticker" aria-hidden="true">
-    <!-- These words describe your specialties. Edit the list if it changes. -->
-    <div class="hero__ticker-track">
-      <span>COMMERCIALS&nbsp;&nbsp;•&nbsp;&nbsp;BEAUTY CONTENT&nbsp;&nbsp;•&nbsp;&nbsp;SOCIAL MEDIA&nbsp;&nbsp;•&nbsp;&nbsp;CINEMATIC STORYTELLING&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-      <span>COMMERCIALS&nbsp;&nbsp;•&nbsp;&nbsp;BEAUTY CONTENT&nbsp;&nbsp;•&nbsp;&nbsp;SOCIAL MEDIA&nbsp;&nbsp;•&nbsp;&nbsp;CINEMATIC STORYTELLING&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-    </div>
-  </div>
+  <!-- Real footage, front and center — clicking opens the same video
+       modal used across the site (see #projectGrid cards). -->
+  <button class="hero__reel" type="button" data-reveal style="transition-delay:.32s" data-youtube="https://youtu.be/gaB0KQ_1f5s" aria-label="Play OVO Café project video">
+    <span class="hero__reel-bg" style="background-image:url(https://img.youtube.com/vi/gaB0KQ_1f5s/hqdefault.jpg)"></span>
+    <span class="hero__reel-play" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 5.5L18.5 12L7 18.5V5.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+    </span>
+    <span class="hero__reel-corner tl"></span>
+    <span class="hero__reel-corner tr"></span>
+    <span class="hero__reel-corner bl"></span>
+    <span class="hero__reel-corner br"></span>
+    <span class="hero__reel-tag">Now screening — OVO Café</span>
+  </button>
 </section>
 
 <!-- ============================================================
-     FEATURED PROJECT
-     One spotlight video, embedded from YouTube, shown in the
-     original widescreen (16:9) cinematic frame.
+     SHEET 002 — FEATURED PROJECT
+     One spotlight video, embedded from YouTube.
      ============================================================ -->
-<section class="section reel" id="featured-project">
-  <p class="section__tc">00:01 — FEATURED PROJECT</p>
-  <h2 class="section__title" data-reveal>Featured Project</h2>
+<section class="sheet viewer" id="featured-project">
+  <div class="viewer__plate">
+    <h2 data-flip>Featured Cut</h2>
+    <span class="code">Sheet 002 — Loupe viewer</span>
+  </div>
   <!-- Replace this description with a line about your featured video -->
-  <p class="section__lede" data-reveal>A closer look at one recent project — best viewed loud.</p>
+  <p class="viewer__lede" data-reveal>The frame worth putting under the loupe first — best viewed loud.</p>
 
-  <div class="reel__frame" data-reveal>
+  <div class="viewer__stage" data-reveal>
     <!-- Replace this YouTube link -->
     <!-- To get an embed link: go to your YouTube video, click Share > Embed,
          and copy the URL inside the src="..." field. It looks like:
@@ -145,17 +143,17 @@
       allowfullscreen
       loading="lazy">
     </iframe>
-    <div class="reel__corner tl"></div>
-    <div class="reel__corner tr"></div>
-    <div class="reel__corner bl"></div>
-    <div class="reel__corner br"></div>
+    <div class="viewer__corner tl"></div>
+    <div class="viewer__corner tr"></div>
+    <div class="viewer__corner bl"></div>
+    <div class="viewer__corner br"></div>
   </div>
-  <p class="reel__credit" data-reveal>Edited for Ariika</p>
+  <p class="viewer__credit" data-reveal>Edited for Ariika</p>
 </section>
 
 <!-- ============================================================
-     FEATURED PROJECTS GRID
-     Each <article class="card"> below is one project card.
+     SHEET 003 — SELECTED WORK (the contact sheet grid)
+     Each <article class="card"> below is one project frame.
 
      TO ADD A NEW PROJECT: copy one entire <article>...</article>
      block (including the comments) and paste it inside the
@@ -168,9 +166,11 @@
      a real YouTube link, and clicking the card opens the video
      in an on-page popup instead of a new tab.
      ============================================================ -->
-<section class="section work" id="work">
-  <p class="section__tc">00:02 — SELECTED WORK</p>
-  <h2 class="section__title" data-reveal>Featured Projects</h2>
+<section class="sheet" id="work">
+  <div class="sheet__head">
+    <h2 data-flip>Selected Work</h2>
+    <span class="code">Sheet 003 — 8 frames</span>
+  </div>
 
   <div class="grid" id="projectGrid">
 
@@ -179,11 +179,15 @@
     <article class="card" data-reveal data-youtube="https://youtube.com/shorts/E6YNnSR42bk">
       <button class="card__frame" type="button" aria-label="Play Healthy Fern project video">
         <span class="card__frame-bg" aria-hidden="true"></span>
-        <span class="card__play">▶</span>
+        <span class="card__fnum">01</span>
+        <span class="card__play" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 5.5L18.5 12L7 18.5V5.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </span>
       </button>
       <div class="card__info">
         <!-- Replace this project title -->
         <h3>Healthy Fern</h3>
+        <span class="card__format">Commercial</span>
         <!-- Replace this description -->
         <p class="card__desc">
 A promotional commercial highlighting the bakery's fresh ingredients and healthy brand identity through polished editing, dynamic pacing, and visually engaging storytelling.
@@ -197,11 +201,15 @@ A promotional commercial highlighting the bakery's fresh ingredients and healthy
     <article class="card" data-reveal data-youtube="https://youtube.com/shorts/uIWWkeWGRTA?feature=share">
       <button class="card__frame" type="button" aria-label="Play Dr. Ataa project video">
         <span class="card__frame-bg" aria-hidden="true"></span>
-        <span class="card__play">▶</span>
+        <span class="card__fnum">02</span>
+        <span class="card__play" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 5.5L18.5 12L7 18.5V5.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </span>
       </button>
       <div class="card__info">
         <!-- Replace this project title -->
         <h3>Dr. Ataa</h3>
+        <span class="card__format">Social &amp; Beauty</span>
         <!-- Replace this description -->
         <p class="card__desc">
 An educational short-form video explaining the differences between Damon braces and Invisalign, edited for clarity, engagement, and easy understanding across social media platforms.
@@ -212,14 +220,18 @@ An educational short-form video explaining the differences between Damon braces 
 
     <!-- ============ PROJECT CARD 3 (copy this whole block to add another) ============ -->
     <!-- Replace this YouTube link -->
-    <article class="card" data-youtube="https://youtube.com/shorts/2mILWVTiB0Q?feature=share">
+    <article class="card" data-reveal data-youtube="https://youtube.com/shorts/2mILWVTiB0Q?feature=share">
       <button class="card__frame" type="button" aria-label="Play TirTir Design project video">
         <span class="card__frame-bg" aria-hidden="true"></span>
-        <span class="card__play">▶</span>
+        <span class="card__fnum">03</span>
+        <span class="card__play" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 5.5L18.5 12L7 18.5V5.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </span>
       </button>
       <div class="card__info">
         <!-- Replace this project title -->
         <h3>TirTir Design</h3>
+        <span class="card__format">Commercial</span>
         <!-- Replace this description -->
         <p class="card__desc">
 A luxury furniture commercial showcasing a signature designer desk through cinematic visuals, refined pacing, and polished editing that emphasizes craftsmanship, elegance, and premium design.
@@ -233,11 +245,15 @@ A luxury furniture commercial showcasing a signature designer desk through cinem
     <article class="card" data-reveal data-youtube="https://youtube.com/shorts/pqOoH9VRgW4?feature=share">
       <button class="card__frame" type="button" aria-label="Play Don Chicko project video">
         <span class="card__frame-bg" aria-hidden="true"></span>
-        <span class="card__play">▶</span>
+        <span class="card__fnum">04</span>
+        <span class="card__play" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 5.5L18.5 12L7 18.5V5.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </span>
       </button>
       <div class="card__info">
         <!-- Replace this project title -->
         <h3>Don Chicko</h3>
+        <span class="card__format">Commercial</span>
         <!-- Replace this description -->
         <p class="card__desc">
 A cinematic restaurant commercial built around the creative concept of a missing rooster, using carefully crafted visuals and storytelling to bring the brand's unique identity to life.
@@ -251,11 +267,15 @@ A cinematic restaurant commercial built around the creative concept of a missing
     <article class="card" data-reveal data-youtube="https://youtube.com/shorts/thSXqg-XLUY?feature=share">
       <button class="card__frame" type="button" aria-label="Play Heal Pilates project video">
         <span class="card__frame-bg" aria-hidden="true"></span>
-        <span class="card__play">▶</span>
+        <span class="card__fnum">05</span>
+        <span class="card__play" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 5.5L18.5 12L7 18.5V5.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </span>
       </button>
       <div class="card__info">
         <!-- Replace this project title -->
         <h3>Heal Pilates</h3>
+        <span class="card__format">Cinematic Brand Film</span>
         <!-- Replace this description -->
         <p class="card__desc">
 A cinematic day-in-the-life commercial following a client's Pilates journey, capturing the calm atmosphere, mindful movement, and welcoming experience through refined pacing and immersive storytelling.
@@ -267,13 +287,17 @@ A cinematic day-in-the-life commercial following a client's Pilates journey, cap
     <!-- ============ PROJECT CARD 6 (copy this whole block to add another) ============ -->
     <!-- Replace this YouTube link -->
     <article class="card" data-reveal data-youtube="https://youtu.be/FGscdATy-Kg">
-      <button class="card__frame" type="button" aria-label="Play Vanilla Cosmetics project video">
+      <button class="card__frame" type="button" aria-label="Play BBS project video">
         <span class="card__frame-bg" aria-hidden="true"></span>
-        <span class="card__play">▶</span>
+        <span class="card__fnum">06</span>
+        <span class="card__play" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 5.5L18.5 12L7 18.5V5.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </span>
       </button>
       <div class="card__info">
         <!-- Replace this project title -->
         <h3>BBS</h3>
+        <span class="card__format">Longform</span>
         <!-- Replace this description -->
         <p class="card__desc">
 A professionally edited podcast featuring an AI specialist, crafted with clean pacing, seamless transitions, and engaging visuals to make complex topics engaging, informative, and easy to follow.
@@ -287,11 +311,15 @@ A professionally edited podcast featuring an AI specialist, crafted with clean p
     <article class="card" data-reveal data-youtube="https://youtu.be/gaB0KQ_1f5s">
       <button class="card__frame" type="button" aria-label="Play OVO Café project video">
         <span class="card__frame-bg" aria-hidden="true"></span>
-        <span class="card__play">▶</span>
+        <span class="card__fnum">07</span>
+        <span class="card__play" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 5.5L18.5 12L7 18.5V5.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </span>
       </button>
       <div class="card__info">
         <!-- Replace this project title -->
         <h3>OVO Café</h3>
+        <span class="card__format">Cinematic Brand Film</span>
         <!-- Replace this description -->
         <p class="card__desc">
 A cinematic brand film capturing the atmosphere, architecture, and artistic character of OVO Café through immersive visuals, refined pacing, and elegant visual storytelling.
@@ -302,14 +330,18 @@ A cinematic brand film capturing the atmosphere, architecture, and artistic char
 
     <!-- ============ PROJECT CARD 8 (copy this whole block to add another) ============ -->
     <!-- Replace this YouTube link -->
-    <article class="card" data-youtube="https://youtube.com/shorts/ed1l_F6n5Jc?feature=share">
+    <article class="card" data-reveal data-youtube="https://youtube.com/shorts/ed1l_F6n5Jc?feature=share">
       <button class="card__frame" type="button" aria-label="Play Harrir project video">
         <span class="card__frame-bg" aria-hidden="true"></span>
-        <span class="card__play">▶</span>
+        <span class="card__fnum">08</span>
+        <span class="card__play" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 5.5L18.5 12L7 18.5V5.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </span>
       </button>
       <div class="card__info">
         <!-- Replace this project title -->
         <h3>Harrir</h3>
+        <span class="card__format">Motion Graphics</span>
         <!-- Replace this description -->
         <p class="card__desc">
 A fashion campaign promoting a seasonal sale through dynamic motion graphics, energetic pacing, and bold visual design crafted to capture attention across social media.
@@ -322,199 +354,218 @@ A fashion campaign promoting a seasonal sale through dynamic motion graphics, en
 </section>
 
 <!-- ============================================================
-     WORK EXPERIENCE
+     SHEET 004 — WORK EXPERIENCE (processing log)
      Each entry below has a Duration, Role, Company, and
      Description — edit any of them directly.
      ============================================================ -->
-<section class="section experience" id="experience">
-  <p class="section__tc">00:03 — TIMELINE</p>
-  <h2 class="section__title" data-reveal>Work Experience</h2>
+<section class="sheet" id="experience">
+  <div class="sheet__head">
+    <h2 data-flip>Processing Log</h2>
+    <span class="code">Sheet 004 — Experience</span>
+  </div>
 
-  <div class="timeline">
-    <div class="timeline__track" aria-hidden="true"></div>
-
-    <div class="clip" data-reveal>
+  <div class="log">
+    <div class="log__row" data-reveal>
       <!-- Replace this duration if it changes -->
-      <div class="clip__code">MAY 2024 — OCT 2024</div>
-      <div class="clip__body">
+      <div class="log__date">MAY 2024 — OCT 2024</div>
+      <div class="log__role">
         <h3>Video Editor</h3>
-        <p class="clip__org">STR Marketing</p>
-        <!-- Replace this description -->
-        <p class="clip__desc">Created engaging promotional and social media videos for a variety of marketing campaigns. Focused on strong pacing, clear visual storytelling, brand consistency, and adapting content for different digital platforms.</p>
+        <p class="client">STR Marketing</p>
       </div>
+      <!-- Replace this description -->
+      <p class="log__note">Created engaging promotional and social media videos for a variety of marketing campaigns. Focused on strong pacing, clear visual storytelling, brand consistency, and adapting content for different digital platforms.</p>
     </div>
 
-    <div class="clip" data-reveal>
+    <div class="log__row" data-reveal>
       <!-- Replace this duration if it changes -->
-      <div class="clip__code">NOV 2024 — DEC 2025</div>
-      <div class="clip__body">
+      <div class="log__date">NOV 2024 — DEC 2025</div>
+      <div class="log__role">
         <h3>Video Editor</h3>
-        <p class="clip__org">Dot Agency</p>
-        <!-- Replace this description -->
-        <p class="clip__desc">Edited commercial, promotional, and social media content for multiple clients. Worked closely with the creative team to turn raw footage into polished videos while meeting campaign requirements, brand guidelines, and tight deadlines.</p>
+        <p class="client">Dot Agency</p>
       </div>
+      <!-- Replace this description -->
+      <p class="log__note">Edited commercial, promotional, and social media content for multiple clients. Worked closely with the creative team to turn raw footage into polished videos while meeting campaign requirements, brand guidelines, and tight deadlines.</p>
     </div>
 
-    <div class="clip" data-reveal>
+    <div class="log__row" data-reveal>
       <!-- Replace this duration if it changes -->
-      <div class="clip__code">JAN 2026 — PRESENT</div>
-      <div class="clip__body">
+      <div class="log__date">JAN 2026 — PRESENT</div>
+      <div class="log__role">
         <h3>Video Editor</h3>
-        <p class="clip__org">Havana Marketing Agency</p>
-        <!-- Replace this description -->
-        <p class="clip__desc">Produce and edit marketing content for brands across social media and digital campaigns. Responsible for shaping footage into engaging final videos through editing, pacing, sound design, color correction, and motion graphics.</p>
+        <p class="client">Havana Marketing Agency</p>
       </div>
+      <!-- Replace this description -->
+      <p class="log__note">Produce and edit marketing content for brands across social media and digital campaigns. Responsible for shaping footage into engaging final videos through editing, pacing, sound design, color correction, and motion graphics.</p>
     </div>
-
   </div>
 </section>
 
 <!-- ============================================================
-     SERVICES ("What I Do")
+     SHEET 005 — SERVICES (spec index)
      Generic — edit wording any time, no personal claims here.
      Each icon is a small inline SVG; swap the path data if you
      ever want a different icon, or leave as-is.
      ============================================================ -->
-<section class="section services" id="services">
-  <p class="section__tc">00:04 — SERVICES</p>
-  <h2 class="section__title" data-reveal>What I Do</h2>
+<section class="sheet" id="services">
+  <span class="index__num" aria-hidden="true">05</span>
+  <div class="sheet__head">
+    <h2 data-flip>Spec Index</h2>
+    <span class="code">Sheet 005 — Services</span>
+  </div>
 
-  <div class="services__grid">
-    <div class="service" data-reveal>
-      <span class="service__icon" aria-hidden="true">
+  <div class="index">
+    <div class="index__row" data-reveal>
+      <span class="index__code">01 / VE</span>
+      <span class="index__icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect x="2" y="6" width="14" height="12" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
           <path d="M16 10.5L21.2 7.6c.5-.3 1.2.1 1.2.7v7.4c0 .6-.7 1-1.2.7L16 13.5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
         </svg>
       </span>
-      <h3>Video Editing</h3>
-      <p>Assembly through final cut. Narrative structure, pacing and rhythm built to hold attention and serve the story.</p>
+      <div class="index__body">
+        <h3>Video Editing</h3>
+        <p>Assembly through final cut. Narrative structure, pacing and rhythm built to hold attention and serve the story.</p>
+      </div>
     </div>
-    <div class="service" data-reveal>
-      <span class="service__icon" aria-hidden="true">
+    <div class="index__row" data-reveal>
+      <span class="index__code">02 / CG</span>
+      <span class="index__icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M4 5v9M4 14a2.5 2.5 0 100 5 2.5 2.5 0 000-5z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
           <path d="M12 5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM12 10v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
           <path d="M20 5v9M20 14a2.5 2.5 0 100 5 2.5 2.5 0 000-5z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
       </span>
-      <h3>Color Grading</h3>
-      <p>Mood and consistency across every frame — from naturalistic grades to bold, stylized looks.</p>
+      <div class="index__body">
+        <h3>Color Grading</h3>
+        <p>Mood and consistency across every frame — from naturalistic grades to bold, stylized looks.</p>
+      </div>
     </div>
-    <div class="service" data-reveal>
-      <span class="service__icon" aria-hidden="true">
+    <div class="index__row" data-reveal>
+      <span class="index__code">03 / SD</span>
+      <span class="index__icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M3 10v4h3.5l4.5 4V6l-4.5 4H3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
           <path d="M16.5 8.5a5 5 0 010 7M19.3 6a9 9 0 010 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
       </span>
-      <h3>Sound Design</h3>
-      <p>Dialogue cleanup, foley and mix that make a cut feel finished, not just assembled.</p>
+      <div class="index__body">
+        <h3>Sound Design</h3>
+        <p>Dialogue cleanup, foley and mix that make a cut feel finished, not just assembled.</p>
+      </div>
     </div>
-    <div class="service" data-reveal>
-      <span class="service__icon" aria-hidden="true">
+    <div class="index__row" data-reveal>
+      <span class="index__code">04 / MG</span>
+      <span class="index__icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 3l9 5-9 5-9-5 9-5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
           <path d="M3 13l9 5 9-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M3 17.5l9 5 9-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </span>
-      <h3>Motion Graphics</h3>
-      <p>Titles, lower thirds and light VFX that support the story without pulling focus from it.</p>
+      <div class="index__body">
+        <h3>Motion Graphics</h3>
+        <p>Titles, lower thirds and light VFX that support the story without pulling focus from it.</p>
+      </div>
     </div>
-    <div class="service" data-reveal>
-      <span class="service__icon" aria-hidden="true">
+    <div class="index__row" data-reveal>
+      <span class="index__code">05 / SB</span>
+      <span class="index__icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M4 8.5A2.5 2.5 0 016.5 6h1.2l1-1.5h6.6l1 1.5h1.2A2.5 2.5 0 0120 8.5V17a2 2 0 01-2 2H6a2 2 0 01-2-2V8.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
           <circle cx="12" cy="12.5" r="3.5" stroke="currentColor" stroke-width="1.5"/>
         </svg>
       </span>
-      <h3>Social &amp; Beauty Content</h3>
-      <p>Short-form edits built for retention — tuned for the pace and format of social platforms.</p>
+      <div class="index__body">
+        <h3>Social &amp; Beauty Content</h3>
+        <p>Short-form edits built for retention — tuned for the pace and format of social platforms.</p>
+      </div>
     </div>
-    <div class="service" data-reveal>
-      <span class="service__icon" aria-hidden="true">
+    <div class="index__row" data-reveal>
+      <span class="index__code">06 / RT</span>
+      <span class="index__icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M13 3L4.5 13.5H11L10.5 21L19.5 10H13L13 3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
         </svg>
       </span>
-      <h3>Rapid Turnaround</h3>
-      <p>Fast, reliable delivery for social and campaign work on tight deadlines.</p>
+      <div class="index__body">
+        <h3>Rapid Turnaround</h3>
+        <p>Fast, reliable delivery for social and campaign work on tight deadlines.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ============================================================
-     CONTACT
+     SHEET 006 — CONTACT (quiet close)
      Fill in your real details below — each one is marked.
      Update both the visible text AND the link (href) for each.
      ============================================================ -->
-<section class="section contact" id="contact">
-  <p class="section__tc">00:05 — CONTACT</p>
-  <h2 class="section__title" data-reveal>Let's Work Together</h2>
-  <p class="section__lede" data-reveal>Tell me about the footage, the deadline, and the feeling you're after.</p>
+<section class="sheet slate" id="contact">
+  <h2 data-flip>Let's Work Together</h2>
+  <p class="slate__lede" data-reveal>Tell me about the footage, the deadline, and the feeling you're after.</p>
 
-  <div class="contact__list" data-reveal>
+  <div class="slate__list" data-reveal>
 
     <!-- Replace this email address (update both the visible text and the mailto: link) -->
-    <a class="contact__item" href="mailto:fahadsajad2141@gmail.com">
-      <span class="contact__icon" aria-hidden="true">
+    <a class="slate__item" href="mailto:fahadsajad2141@gmail.com">
+      <span class="slate__icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect x="2.5" y="5" width="19" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
           <path d="M3.5 6.5L12 13l8.5-6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </span>
-      <span class="contact__text">
-        <span class="contact__label">Email</span>
-        <span class="contact__value">fahadsajad2141@gmail.com</span>
+      <span class="slate__text">
+        <span class="slate__label">Email</span>
+        <span class="slate__value">fahadsajad2141@gmail.com</span>
       </span>
     </a>
 
     <!-- Replace this WhatsApp number (update both the visible text and the wa.me link) -->
-    <a class="contact__item" href="https://wa.me/9647732436371" target="_blank" rel="noopener">
-      <span class="contact__icon" aria-hidden="true">
+    <a class="slate__item" href="https://wa.me/9647732436371" target="_blank" rel="noopener">
+      <span class="slate__icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M5 4h3.5l1.5 4.5-2 1.5a12 12 0 006 6l1.5-2 4.5 1.5V19a2 2 0 01-2.2 2A16 16 0 013 6.2 2 2 0 015 4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
         </svg>
       </span>
-      <span class="contact__text">
-        <span class="contact__label">WhatsApp</span>
-        <span class="contact__value">+964 773 243 6371</span>
+      <span class="slate__text">
+        <span class="slate__label">WhatsApp</span>
+        <span class="slate__value">+964 773 243 6371</span>
       </span>
     </a>
 
     <!-- Replace this LinkedIn URL (update both the visible text and the href) -->
-    <a class="contact__item"
+    <a class="slate__item"
    href="https://www.linkedin.com/in/fahad-sajad-585476399/"
    target="_blank"
    rel="noopener">
-      <span class="contact__icon" aria-hidden="true">
+      <span class="slate__icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect x="3" y="3" width="18" height="18" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
           <path d="M7.5 10.5V17M7.5 7.5V7.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
           <path d="M11.5 17v-4a2.2 2.2 0 014.4 0v4M11.5 10.5V17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </span>
-      <span class="contact__text">
-        <span class="contact__label">LinkedIn</span>
-        <span class="contact__value">linkedin.com/in/fahad-sajad</span>
+      <span class="slate__text">
+        <span class="slate__label">LinkedIn</span>
+        <span class="slate__value">linkedin.com/in/fahad-sajad</span>
       </span>
     </a>
 
     <!-- Replace this Instagram URL (update both the visible text and the href) -->
-    <a class="contact__item" href="https://www.instagram.com/fahadsajad_/"
+    <a class="slate__item" href="https://www.instagram.com/fahadsajad_/"
 target="_blank"
 rel="noopener">
-      <span class="contact__icon" aria-hidden="true">
+      <span class="slate__icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.5"/>
           <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/>
           <circle cx="17.3" cy="6.7" r="1" fill="currentColor"/>
         </svg>
       </span>
-      <span class="contact__text">
-        <span class="contact__label">Instagram</span>
-        <span class="contact__value">@fahadsajad_</span>
+      <span class="slate__text">
+        <span class="slate__label">Instagram</span>
+        <span class="slate__value">@fahadsajad_</span>
       </span>
     </a>
 
@@ -523,9 +574,10 @@ rel="noopener">
 
 </main>
 
-<footer class="footer">
+<footer class="stamp">
+  <span class="stamp__mark">Processed</span>
   <span>© <span id="year"></span> Fahad Sajad. All footage protected.</span>
-  <a href="#top" class="footer__top">Back to top ↑</a>
+  <a href="#top">Back to top ↑</a>
 </footer>
 
 <!-- ============================================================

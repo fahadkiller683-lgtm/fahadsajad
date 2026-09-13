@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-13T12:10:38Z",
+  "title": "Design System: Fahad Sajad — Video Editor Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "paper": { "role": "neutral", "displayName": "Light-Table Paper", "canonical": "#ece5d3" },
+      "paper-shadow": { "role": "neutral", "displayName": "Paper Shadow", "canonical": "#d9cfb0" },
+      "steel-dark": { "role": "neutral", "displayName": "Steel Dark", "canonical": "#302d27" },
+      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#1c1911" },
+      "ink-dim": { "role": "neutral", "displayName": "Ink Dim", "canonical": "#56503e" },
+      "ink-faint": { "role": "neutral", "displayName": "Ink Faint", "canonical": "#6b6450" },
+      "grease": { "role": "primary", "displayName": "Grease-Pencil Orange", "canonical": "#a83c09" },
+      "grease-dim": { "role": "primary", "displayName": "Grease-Pencil Orange, Dim", "canonical": "#7a2c07" },
+      "frame-void": { "role": "neutral", "displayName": "Frame Void", "canonical": "#1b1914" },
+      "on-dark": { "role": "neutral", "displayName": "On Dark", "canonical": "#ece5d3" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero headline only." },
+      "headline": { "displayName": "Headline", "purpose": "Every section h2, always italic." },
+      "body": { "displayName": "Body", "purpose": "Lede copy and descriptions, max ~55ch." },
+      "label": { "displayName": "Label", "purpose": "Mono functional labels — frame numbers, spec codes, nav tabs. Floor: 0.7rem." }
+    },
+    "shadows": [
+      { "name": "light-bar-indicator", "value": "0 2px 5px rgba(20,15,8,.45)", "purpose": "The only shadow in the system — a real offset cast shadow under the scroll-position light-bar window." }
+    ],
+    "motion": [
+      { "name": "ease-standard", "value": "cubic-bezier(.16,.84,.44,1)", "purpose": "Default easing for all transitions and reveals." },
+      { "name": "dur-s", "value": ".3s", "purpose": "Short state transitions (hover, focus, nav)." },
+      { "name": "dur-m", "value": ".6s", "purpose": "Reveal-on-scroll fades and rises." },
+      { "name": "dur-l", "value": "1s", "purpose": "Reserved for slower, page-level motion." }
+    ],
+    "breakpoints": [
+      { "name": "tablet", "value": "860px" },
+      { "name": "mobile", "value": "520px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Pill CTA — transparent at rest, fills solid ink with paper text on hover/focus.",
+      "html": "<a href=\"#work\" class=\"ds-btn-primary\"><span>Review the Full Sheet</span><svg viewBox=\"0 0 14 14\" fill=\"none\"><path d=\"M1 7H13M13 7L8 2M13 7L8 12\" stroke=\"currentColor\" stroke-width=\"1.4\"/></svg></a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 0.7rem; padding: 0.95rem 1.6rem; border: 1.5px solid #1c1911; border-radius: 99px; font-family: 'Martian Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: #1c1911; transition: background 0.3s cubic-bezier(.16,.84,.44,1), color 0.3s cubic-bezier(.16,.84,.44,1); } .ds-btn-primary svg { width: 14px; height: 14px; } .ds-btn-primary:hover, .ds-btn-primary:focus-visible { background: #1c1911; color: #ece5d3; }"
+    },
+    {
+      "name": "Project Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "A contact-sheet frame — grayscale thumbnail that reveals color on hover, real frame number, SVG play badge.",
+      "html": "<article class=\"ds-card\"><button class=\"ds-card__frame\" type=\"button\"><span class=\"ds-card__bg\"></span><span class=\"ds-card__fnum\">01</span><span class=\"ds-card__play\"><svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 5.5L18.5 12L7 18.5V5.5z\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linejoin=\"round\"/></svg></span></button><div class=\"ds-card__info\"><h3>Project Title</h3><p>One or two lines describing the project.</p></div></article>",
+      "css": ".ds-card { background: #ece5d3; display: flex; flex-direction: column; } .ds-card__frame { position: relative; aspect-ratio: 4/3; overflow: hidden; width: 100%; background: #1b1914; cursor: pointer; } .ds-card__bg { position: absolute; inset: 0; background-size: cover; background-position: center; filter: grayscale(1) contrast(1.05); transition: filter 0.6s, transform 0.7s; } .ds-card__frame:hover .ds-card__bg { filter: grayscale(0) contrast(1.05); transform: scale(1.06); } .ds-card__fnum { position: absolute; left: 0.6rem; top: 0.6rem; font-family: 'Martian Mono', monospace; font-size: 0.75rem; color: #ece5d3; } .ds-card__play { position: absolute; right: 0.7rem; bottom: 0.7rem; width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(236,229,211,.55); color: #ece5d3; display: flex; align-items: center; justify-content: center; opacity: 0.85; } .ds-card__play svg { width: 13px; height: 13px; } .ds-card__frame:hover .ds-card__play { opacity: 1; background: #7a2c07; border-color: #7a2c07; } .ds-card__info { padding: 1.1rem 1.2rem 1.3rem; border-top: 1px solid rgba(28,25,17,.16); } .ds-card__info h3 { font-family: 'Alegreya', serif; font-style: italic; font-size: 1.05rem; margin: 0 0 0.4rem; } .ds-card__info p { font-size: 0.85rem; color: #56503e; line-height: 1.55; margin: 0; }"
+    },
+    {
+      "name": "Navigation Tab",
+      "kind": "nav",
+      "refersTo": "nav-tab",
+      "description": "A spine-index nav link, prefixed by its real frame number, underline grows on hover.",
+      "html": "<a href=\"#work\" data-frame=\"02\" class=\"ds-nav-tab\">Work</a>",
+      "css": ".ds-nav-tab { font-family: 'Martian Mono', monospace; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: #56503e; display: inline-flex; align-items: baseline; gap: 0.4rem; position: relative; transition: color 0.3s; } .ds-nav-tab::before { content: attr(data-frame); color: #a83c09; } .ds-nav-tab::after { content: ''; position: absolute; bottom: -5px; left: 0; height: 1px; width: 0; background: #1c1911; transition: width 0.3s; } .ds-nav-tab:hover { color: #1c1911; } .ds-nav-tab:hover::after, .ds-nav-tab:focus-visible::after { width: 100%; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Proof Sheet",
+    "overview": "The site is a working contact sheet reviewed on a light table, not a cinematic-viewer skin. Every section is a numbered \"sheet\" in a proof book: frame numbers, spec codes, and a grease-pencil review mark carry real information the way they would on an editor's actual proof sheet, not as decoration borrowed from the genre. The system explicitly rejects the video-editor-portfolio default (REC dot, running timecode, film grain, tally-light red on black) that the incumbent design used before this redesign — that look is the confirmed visual anti-reference.\n\nThe palette stays warm and paper-toned at rest; the single grease-orange accent is rare and functional; the display type is an italic serif with real editorial character rather than a system sans or an overused \"safe\" display face. Depth is expressed through material contrast (paper vs. near-black frame-void) rather than shadow.",
+    "keyCharacteristics": [
+      "Warm light-table paper as the constant ground, never pure white or pure black",
+      "One accent color, used only where it marks something real (a link, an active state, a position indicator)",
+      "Italic serif display type carries the personality; mono type carries data",
+      "Frame/sheet numbering is real information architecture, not a decorative device",
+      "Flat at rest; shadows only appear as a response to interaction"
+    ],
+    "rules": [
+      { "name": "The One Mark Rule", "body": "The grease-orange accent appears only where it marks something real — an active link, a hover state, a position indicator. It never fills a large decorative area and never appears twice in the same place for emphasis alone.", "section": "colors" },
+      { "name": "The Warm Neutral Rule", "body": "Every neutral in the system carries the same warm, slightly brown-green undertone — never a cool or pure gray.", "section": "colors" },
+      { "name": "The 11px Floor Rule", "body": "No functional mono label renders below 0.7rem (11.2px). 22 instances were found below this floor and fixed during the finish review — never reintroduce a sub-11px label size.", "section": "typography" },
+      { "name": "The Italic-Only Headline Rule", "body": "Every h2/h1 in the display role renders italic. An upright display heading is off-system.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "Surfaces are flat at rest. The only shadow in the system belongs to the light-bar indicator, and it always carries a real offset — never a symmetrical glow.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep the grease accent (#a83c09) rare — active states, links, the light-bar indicator, the current nav tab. Nothing else.",
+      "Do keep every functional label at or above 0.7rem (11.2px).",
+      "Do vary each new section's opening composition rather than repeating the same kicker-then-heading template.",
+      "Do keep the work grid's card count a multiple of its column count (4 desktop / 2 tablet) so the last row never leaves a trailing empty void.",
+      "Do use real SVG line icons (stroke=\"currentColor\", stroke-width: 1.5) for any icon."
+    ],
+    "donts": [
+      "Don't add a second accent color. The system is built around exactly one.",
+      "Don't use a symmetrical/zero-offset shadow anywhere — every shadow needs a real vertical offset.",
+      "Don't use a Unicode glyph or emoji as an icon — draw it as an SVG matching the existing stroke weight.",
+      "Don't set a display heading upright (non-italic) — italic is load-bearing to the system's voice.",
+      "Don't reintroduce timecode, REC-dot, film-grain, or scrubber-as-video-player motifs — that is the explicitly rejected prior world."
+    ]
+  }
+}

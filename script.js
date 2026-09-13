@@ -1,20 +1,19 @@
 /* ==========================================================================
    FAHAD SAJAD — EDITOR PORTFOLIO — behavior
+   Contact Sheet / Light Table build
    ========================================================================== */
 (() => {
   'use strict';
 
   /* Flips the no-js/js gate immediately, before anything below can throw,
      so CSS that depends on JS being alive (like hiding the system cursor
-     in favor of the custom one) never fires unless this script actually ran. */
+     in favor of the loupe) never fires unless this script actually ran. */
   document.documentElement.classList.remove('no-js');
   document.documentElement.classList.add('js');
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- Loading screen (no edits needed) ----------
-     Shows a short, simulated progress count while the page settles,
-     then fades out. Purely cosmetic — nothing to configure here. */
+  /* ---------- Loading screen ---------- */
   document.body.classList.add('is-loading');
   const loader = document.getElementById('loader');
   const loaderFill = document.getElementById('loaderFill');
@@ -36,12 +35,12 @@
         clearInterval(loadingInterval);
         if (loaderFill) loaderFill.style.width = '100%';
         if (loaderTC) loaderTC.textContent = '100%';
-        setTimeout(finishLoading, 300);
+        setTimeout(finishLoading, 250);
         return;
       }
       if (loaderFill) loaderFill.style.width = `${progress}%`;
       if (loaderTC) loaderTC.textContent = `${Math.floor(progress)}%`;
-    }, 130);
+    }, 120);
   }
 
   /* ---------- Footer year ---------- */
@@ -66,84 +65,124 @@
     });
   }
 
-  /* ---------- Timecode helpers ---------- */
-  function toTimecode(totalSeconds) {
-    const h = Math.floor(totalSeconds / 3600);
-    const m = Math.floor((totalSeconds % 3600) / 60);
-    const s = Math.floor(totalSeconds % 60);
-    const f = Math.floor((totalSeconds % 1) * 24); // pseudo-frames at 24fps
-    const pad = (n) => String(n).padStart(2, '0');
-    return `${pad(h)}:${pad(m)}:${pad(s)}:${pad(f)}`;
-  }
-
-  /* ---------- Live "REC" clock in hero ---------- */
-  const liveClock = document.getElementById('liveClock');
-  if (liveClock && !prefersReduced) {
-    const start = performance.now();
-    function tickClock(now) {
-      const elapsed = (now - start) / 1000;
-      liveClock.textContent = toTimecode(elapsed % 3600);
-      requestAnimationFrame(tickClock);
-    }
-    requestAnimationFrame(tickClock);
-  } else if (liveClock) {
-    liveClock.textContent = '00:00:00:00';
-  }
-
-  /* ---------- Scroll progress scrubber (signature element) ---------- */
-  const scrubberFill = document.getElementById('scrubberFill');
-  const scrubberHead = document.getElementById('scrubberHead');
-  const scrubberTC = document.getElementById('scrubberTC');
-  const totalRunSeconds = 180; // maps full page scroll to a nominal 00:03:00:00 "runtime"
-
-  function updateScrubber() {
+  /* ---------- Light bar: shows scroll position along the sheet ---------- */
+  const lightWindow = document.getElementById('scrubberHead');
+  function updateLightbar() {
+    if (!lightWindow) return;
     const scrollTop = window.scrollY;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     const progress = docHeight > 0 ? Math.min(scrollTop / docHeight, 1) : 0;
-
-    if (scrubberFill) scrubberFill.style.width = `${progress * 100}%`;
-    if (scrubberHead) scrubberHead.style.left = `${progress * 100}%`;
-    if (scrubberTC) scrubberTC.textContent = toTimecode(progress * totalRunSeconds);
+    lightWindow.style.left = `${progress * 92}%`;
   }
-
-  let scrubberTicking = false;
+  let lbTicking = false;
   window.addEventListener('scroll', () => {
-    if (!scrubberTicking) {
-      requestAnimationFrame(() => {
-        updateScrubber();
-        scrubberTicking = false;
-      });
-      scrubberTicking = true;
+    if (!lbTicking) {
+      requestAnimationFrame(() => { updateLightbar(); lbTicking = false; });
+      lbTicking = true;
     }
   }, { passive: true });
-  updateScrubber();
+  updateLightbar();
 
-  /* ---------- Nav background on scroll ---------- */
+  /* ---------- Spine background on scroll ---------- */
   const nav = document.getElementById('nav');
   function updateNavBg() {
     if (!nav) return;
-    nav.style.background = window.scrollY > 40 ? 'rgba(10,10,9,.75)' : 'transparent';
-    nav.style.backdropFilter = window.scrollY > 40 ? 'blur(10px)' : 'none';
+    nav.style.background = window.scrollY > 40
+      ? 'linear-gradient(to bottom, rgba(236,229,211,.96), rgba(236,229,211,.85) 85%, transparent)'
+      : 'linear-gradient(to bottom, rgba(236,229,211,.94), rgba(236,229,211,.75) 80%, transparent)';
   }
   window.addEventListener('scroll', updateNavBg, { passive: true });
   updateNavBg();
 
-  /* ---------- Scroll-triggered reveals ---------- */
+  /* ---------- Active section state in the spine nav ----------
+     Marks whichever sheet is currently in view so the nav's own
+     frame-number prefix can answer "where am I" the same way the
+     rest of the page's indexing does. */
+  const navTabs = document.querySelectorAll('.spine__tabs a[href^="#"]');
+  if ('IntersectionObserver' in window && navTabs.length) {
+    const tabsByTarget = new Map();
+    navTabs.forEach(tab => tabsByTarget.set(tab.getAttribute('href').slice(1), tab));
+
+    const sectionIo = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const tab = tabsByTarget.get(entry.target.id);
+        if (!tab) return;
+        tab.classList.toggle('is-current', entry.isIntersecting);
+      });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+
+    tabsByTarget.forEach((_, id) => {
+      const section = document.getElementById(id);
+      if (section) sectionIo.observe(section);
+    });
+  }
+
+  /* ---------- Scroll-triggered reveals (fade/rise) ---------- */
   const revealEls = document.querySelectorAll('[data-reveal]');
   if ('IntersectionObserver' in window && revealEls.length) {
     const io = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          // stagger children of the same section slightly
           entry.target.classList.add('is-visible');
           io.unobserve(entry.target);
         }
       });
     }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
-
     revealEls.forEach(el => io.observe(el));
   } else {
     revealEls.forEach(el => el.classList.add('is-visible'));
+  }
+
+  /* ---------- Cascade-flip headings ----------
+     Splits each [data-flip] heading into per-word spans and reveals
+     them with a staggered flip as the section scrolls into view —
+     the page's one signature motion, used consistently everywhere
+     instead of scattered one-off effects. Falls back to a plain
+     reveal (no split) under reduced motion or without IO support. */
+  const flipEls = document.querySelectorAll('[data-flip]');
+
+  function splitIntoWordSpans(root) {
+    function walk(node) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        const frag = document.createDocumentFragment();
+        node.textContent.split(/(\s+)/).forEach(chunk => {
+          if (chunk === '') return;
+          if (/^\s+$/.test(chunk)) {
+            frag.appendChild(document.createTextNode(chunk));
+          } else {
+            const span = document.createElement('span');
+            span.textContent = chunk;
+            frag.appendChild(span);
+          }
+        });
+        node.replaceWith(frag);
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        Array.from(node.childNodes).forEach(walk);
+      }
+    }
+    Array.from(root.childNodes).forEach(walk);
+    root.querySelectorAll('span').forEach((span, i) => {
+      span.style.transitionDelay = `${Math.min(i * 0.035, 0.6)}s`;
+    });
+  }
+
+  if (flipEls.length && !prefersReduced) {
+    flipEls.forEach(splitIntoWordSpans);
+    if ('IntersectionObserver' in window) {
+      const flipIo = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            flipIo.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.4 });
+      flipEls.forEach(el => flipIo.observe(el));
+    } else {
+      flipEls.forEach(el => el.classList.add('is-visible'));
+    }
+  } else {
+    flipEls.forEach(el => el.classList.add('is-visible'));
   }
 
   /* ---------- Project cards: auto-generate YouTube thumbnails ----------
@@ -166,7 +205,8 @@
 
     const frameBg = card.querySelector('.card__frame-bg');
     if (frameBg) {
-      frameBg.style.backgroundImage = `url(https://img.youtube.com/vi/${videoId}/maxresdefault.jpg)`;
+      frameBg.style.backgroundImage = `url(https://img.youtube.com/vi/${videoId}/hqdefault.jpg)`;
+      frameBg.dataset.thumb = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
     }
   });
 
@@ -194,7 +234,7 @@
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('modal-open');
-    modalIframe.src = ''; // stops playback when closed
+    modalIframe.src = '';
   }
 
   document.querySelectorAll('.card[data-youtube]').forEach(card => {
@@ -202,11 +242,21 @@
     if (!trigger) return;
     trigger.addEventListener('click', () => {
       const videoId = getYouTubeId(card.getAttribute('data-youtube'));
-      if (!videoId) return; // no real link added yet — nothing to open
+      if (!videoId) return;
       const titleEl = card.querySelector('.card__info h3');
       openModal(videoId, titleEl ? titleEl.textContent.trim() : '');
     });
   });
+
+  /* ---------- Hero reel: opens the same modal as a project card ---------- */
+  const heroReel = document.querySelector('.hero__reel[data-youtube]');
+  if (heroReel) {
+    heroReel.addEventListener('click', () => {
+      const videoId = getYouTubeId(heroReel.getAttribute('data-youtube'));
+      if (!videoId) return;
+      openModal(videoId, 'OVO Café');
+    });
+  }
 
   if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
   if (modal) {
@@ -220,19 +270,44 @@
     }
   });
 
-  /* ---------- Custom cursor on project cards ----------
-     Only activates on devices with a real mouse (see the media query
-     in style.css) — touch devices keep their normal behavior. */
-  const customCursor = document.getElementById('customCursor');
-  const allCards = document.querySelectorAll('#projectGrid .card');
-  if (customCursor && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  /* ---------- Loupe cursor on project frames ----------
+     Tracks the mouse over a card and shows a zoomed crop of that
+     card's own thumbnail inside the loupe — a real magnifier, not a
+     decorative circle. Only activates on devices with a real mouse. */
+  const loupe = document.getElementById('customCursor');
+  const workCards = document.querySelectorAll('#projectGrid .card');
+  if (loupe && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    let activeFrame = null;
+
     document.addEventListener('mousemove', (e) => {
-      customCursor.style.left = `${e.clientX}px`;
-      customCursor.style.top = `${e.clientY}px`;
+      loupe.style.left = `${e.clientX}px`;
+      loupe.style.top = `${e.clientY}px`;
+      if (activeFrame) {
+        const rect = activeFrame.getBoundingClientRect();
+        const px = Math.min(Math.max((e.clientX - rect.left) / rect.width, 0), 1) * 100;
+        const py = Math.min(Math.max((e.clientY - rect.top) / rect.height, 0), 1) * 100;
+        loupe.style.backgroundPosition = `${px}% ${py}%`;
+      }
     });
-    allCards.forEach(card => {
-      card.addEventListener('mouseenter', () => customCursor.classList.add('is-active'));
-      card.addEventListener('mouseleave', () => customCursor.classList.remove('is-active'));
+
+    workCards.forEach(card => {
+      const frame = card.querySelector('.card__frame');
+      const bg = card.querySelector('.card__frame-bg');
+      if (!frame) return;
+      frame.addEventListener('mouseenter', () => {
+        activeFrame = frame;
+        loupe.classList.add('is-active');
+        const thumb = bg && bg.dataset.thumb;
+        if (thumb) {
+          loupe.style.backgroundImage = `url(${thumb})`;
+          loupe.style.backgroundSize = '280%';
+        }
+      });
+      frame.addEventListener('mouseleave', () => {
+        activeFrame = null;
+        loupe.classList.remove('is-active');
+        loupe.style.backgroundImage = '';
+      });
     });
   }
 
@@ -244,7 +319,7 @@
       const target = document.querySelector(targetId);
       if (!target) return;
       e.preventDefault();
-      const offset = 70;
+      const offset = nav ? nav.offsetHeight + 4 : 76;
       const top = target.getBoundingClientRect().top + window.scrollY - offset;
       window.scrollTo({ top, behavior: prefersReduced ? 'auto' : 'smooth' });
     });

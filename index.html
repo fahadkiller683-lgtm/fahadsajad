@@ -108,10 +108,12 @@
     <span>Longform</span>
   </div>
 
-  <!-- Real footage, front and center — clicking opens the same video
-       modal used across the site (see #projectGrid cards). -->
-  <button class="hero__reel" type="button" data-reveal style="transition-delay:.32s" data-youtube="https://youtu.be/gaB0KQ_1f5s" aria-label="Play OVO Café project video">
-    <span class="hero__reel-bg" style="background-image:url(https://img.youtube.com/vi/gaB0KQ_1f5s/hqdefault.jpg)"></span>
+  <!-- Real footage, playing on loop, front and center — clicking still opens
+       the full video with sound in the same modal used across the site. -->
+  <button class="hero__reel" type="button" data-reveal style="transition-delay:.32s" data-youtube="https://youtu.be/gaB0KQ_1f5s" aria-label="Play OVO Café project video with sound">
+    <video class="hero__reel-bg" autoplay muted loop playsinline preload="auto" poster="https://img.youtube.com/vi/gaB0KQ_1f5s/hqdefault.jpg">
+      <source src="media/ovo-cafe-reel.mp4" type="video/mp4">
+    </video>
     <span class="hero__reel-play" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 5.5L18.5 12L7 18.5V5.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
     </span>

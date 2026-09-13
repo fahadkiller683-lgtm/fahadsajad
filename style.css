@@ -347,8 +347,8 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
 }
 .hero__reel-bg{
   position:absolute; inset:0;
-  background-size:cover;
-  background-position:center;
+  width:100%; height:100%;
+  object-fit:cover;
   transition:transform .7s var(--ease);
 }
 .hero__reel:hover .hero__reel-bg,
@@ -356,18 +356,22 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
 .hero__reel-play{
   position:absolute;
   top:50%; left:50%;
-  transform:translate(-50%,-50%);
+  transform:translate(-50%,-50%) scale(.85);
   z-index:2;
   width:64px; height:64px;
   border-radius:50%;
   border:1.5px solid var(--on-dark);
   color:var(--on-dark);
+  background:rgba(27,25,20,.35);
   display:flex; align-items:center; justify-content:center;
-  transition:background var(--dur-s) var(--ease), border-color var(--dur-s) var(--ease);
+  opacity:0;
+  transition:background var(--dur-s) var(--ease), border-color var(--dur-s) var(--ease), opacity var(--dur-s) var(--ease), transform var(--dur-s) var(--ease);
 }
 .hero__reel-play svg{ width:22px; height:22px; }
 .hero__reel:hover .hero__reel-play,
 .hero__reel:focus-visible .hero__reel-play{
+  opacity:1;
+  transform:translate(-50%,-50%) scale(1);
   background:var(--grease-dim);
   border-color:var(--grease-dim);
 }
@@ -677,19 +681,17 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
 /* ---------------- Slate (Contact, Sheet 006) — quiet close ---------------- */
 .slate{
   padding-top:clamp(3rem,6vw,4.5rem);
-  text-align:right;
+  text-align:left;
 }
 .slate h2{
   font-size:clamp(1.8rem,4vw,2.6rem);
   font-style:italic;
-  margin-left:auto;
   max-width:16ch;
   margin-bottom:1rem;
 }
 .slate__lede{
   color:var(--ink-dim);
   font-size:1rem;
-  margin-left:auto;
   max-width:40ch;
   margin-bottom:2rem;
 }
@@ -700,7 +702,6 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
   background:var(--ink);
   border:1px solid var(--ink);
   max-width:760px;
-  margin-left:auto;
   text-align:left;
 }
 .slate__item{

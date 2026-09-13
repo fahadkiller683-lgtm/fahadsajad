@@ -4,6 +4,12 @@
 (() => {
   'use strict';
 
+  /* Flips the no-js/js gate immediately, before anything below can throw,
+     so CSS that depends on JS being alive (like hiding the system cursor
+     in favor of the custom one) never fires unless this script actually ran. */
+  document.documentElement.classList.remove('no-js');
+  document.documentElement.classList.add('js');
+
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------- Loading screen (no edits needed) ----------

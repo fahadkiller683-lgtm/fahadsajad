@@ -13,6 +13,7 @@
   --text-faint:#807d73;
   --accent:    #e2372a;
   --accent-dim:#5c1712;
+  --accent-contrast:#c6261b; /* darkened accent — clears 4.5:1 against --text for text/icons filled with it */
 
   --f-display: 'Bebas Neue', sans-serif;
   --f-body:    'Inter', sans-serif;
@@ -61,7 +62,7 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
   align-items:center;
   gap:.55rem;
   font-family:var(--f-mono);
-  font-size:.72rem;
+  font-size:.75rem;
   letter-spacing:.14em;
   color:var(--accent);
   margin:0 0 1rem;
@@ -173,10 +174,13 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
   opacity:1;
   transform:translate(-50%,-50%) scale(1);
 }
-/* Only takes over the system cursor on devices with a real mouse */
+/* Only takes over the system cursor on devices with a real mouse,
+   and only once script.js has actually run (see the .js class on
+   <html>) — otherwise the custom cursor never appears and this would
+   leave the card hoverable with no pointer feedback at all. */
 @media (hover:hover) and (pointer:fine){
-  .work .card,
-  .work .card *{ cursor:none; }
+  .js .work .card,
+  .js .work .card *{ cursor:none; }
 }
 @media (hover:none), (pointer:coarse){
   .custom-cursor{ display:none; }
@@ -265,7 +269,7 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
 .nav__links a:focus-visible::after{ width:100%; }
 .nav__num{
   font-family:var(--f-mono);
-  font-size:.65rem;
+  font-size:.75rem;
   color:var(--accent);
 }
 .nav__toggle{
@@ -502,6 +506,24 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
 .reel__corner.tr{ top:-1px; right:-1px; border-left:none; border-bottom:none; }
 .reel__corner.bl{ bottom:-1px; left:-1px; border-right:none; border-top:none; }
 .reel__corner.br{ bottom:-1px; right:-1px; border-left:none; border-top:none; }
+.reel__credit{
+  display:flex;
+  align-items:center;
+  gap:.55rem;
+  font-family:var(--f-mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--text-faint);
+  margin-top:1rem;
+}
+.reel__credit::before{
+  content:'';
+  width:14px;
+  height:1px;
+  flex-shrink:0;
+  background:var(--text-faint);
+}
 
 /* ---------------- Featured projects ---------------- */
 .grid{
@@ -613,7 +635,7 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
   opacity:1;
   border-color:var(--accent);
   color:var(--text);
-  background:var(--accent);
+  background:var(--accent-contrast);
 }
 .card__info{
   padding:1.6rem 1.7rem 1.9rem;
@@ -851,7 +873,7 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
 }
 .contact__label{
   font-family:var(--f-mono);
-  font-size:.68rem;
+  font-size:.75rem;
   letter-spacing:.1em;
   text-transform:uppercase;
   color:var(--text-faint);

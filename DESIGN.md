@@ -2,16 +2,16 @@
 name: Fahad Sajad — Video Editor Portfolio
 description: A working contact sheet reviewed on a light table — proof of range, not a cinematic-viewer skin.
 colors:
-  paper: "#ece5d3"
-  paper-shadow: "#d9cfb0"
-  steel-dark: "#302d27"
-  ink: "#1c1911"
-  ink-dim: "#56503e"
-  ink-faint: "#6b6450"
-  grease: "#a83c09"
-  grease-dim: "#7a2c07"
-  frame-void: "#1b1914"
-  on-dark: "#ece5d3"
+  paper: "#e9e7e1"
+  paper-shadow: "#dcd9d1"
+  steel-dark: "#26251f"
+  ink: "#171717"
+  ink-dim: "#676662"
+  ink-faint: "#57564f"
+  grease: "#b74a32"
+  grease-dim: "#93392a"
+  frame-void: "#141412"
+  on-dark: "#f2f0eb"
 typography:
   display:
     fontFamily: "Alegreya, Georgia, serif"
@@ -66,37 +66,37 @@ components:
 
 The site is a working contact sheet reviewed on a light table, not a cinematic-viewer skin. Every section is a numbered "sheet" in a proof book: frame numbers, spec codes, and a grease-pencil review mark carry real information the way they would on an editor's actual proof sheet, not as decoration borrowed from the genre. The system explicitly rejects the video-editor-portfolio default (REC dot, running timecode, film grain, tally-light red on black) that the incumbent design used before this redesign — that look is the confirmed visual anti-reference.
 
-The palette stays warm and paper-toned at rest; the single grease-orange accent is rare and functional; the display type is an italic serif with real editorial character rather than a system sans or an overused "safe" display face. Depth is expressed through material contrast (paper vs. near-black frame-void) rather than shadow.
+The palette stays cool and desaturated at rest — off-white and near-black rather than cream and brown, closer to a film lab or print-production sheet than a warm lifestyle brand; the single rust accent is rare and functional; the display type is an italic serif with real editorial character rather than a system sans or an overused "safe" display face. Depth is expressed through material contrast (paper vs. near-black frame-void) and thin, deliberate borders rather than soft shadow.
 
 **Key Characteristics:**
-- Warm light-table paper as the constant ground, never pure white or pure black
+- Cool, desaturated off-white light-table paper as the constant ground, never pure white, pure black, or warm cream
 - One accent color, used only where it marks something real (a link, an active state, a position indicator)
 - Italic serif display type carries the personality; mono type carries data
 - Frame/sheet numbering is real information architecture, not a decorative device
-- Flat at rest; shadows only appear as a response to interaction
+- Flat at rest; sharp/thin borders over soft shadow; shadows only appear as a functional response to interaction, and stay tight rather than diffuse
 
 ## Colors
 
-Warm, paper-grounded, and restrained — one saturated color against a near-monochrome field.
+Cool, desaturated, and restrained — one saturated rust accent against a near-monochrome field. Corrected from an earlier warm cream/brown iteration that read closer to an organic skincare or wellness brand than a production/archive tool — this palette deliberately drops that warm cast for a cinematic, technical, editorial-archive feel.
 
 ### Primary
-- **Grease-Pencil Orange** (`#a83c09`): the only accent in the system. Marks real things only — the hero's accent phrase, the *current* nav tab (both its frame-number prefix and its underline, driven by scroll position via IntersectionObserver), the Processing Log's timeline markers (one per real employment entry), hover states on interactive rows, the light-bar position indicator. Corrected from an earlier `#b8420a` specifically to clear 4.5:1 contrast against the paper ground at small text sizes. A finish-review pass found it applied unconditionally (not state-marking) on the logo wordmark, every nav prefix at rest, and every Processing Log date — all three were corrected to `--ink-dim`/`--ink-faint`; only the footer's "Processed" stamp keeps a standing, non-state-dependent use of the accent, as the system's one deliberate exception (a real stamp is a singular authenticating mark by nature).
-- **Grease-Pencil Orange, Dim** (`#7a2c07`): the pressed/hover fill for the accent when it needs to sit *behind* light text (e.g. the card play-button hover fill), never used as a standalone accent.
+- **Grease-Pencil Rust** (`#b74a32`): the only accent in the system. Marks real things only — the hero's accent phrase, the *current* nav tab (both its frame-number prefix and its underline, driven by scroll position via IntersectionObserver), the Processing Log's timeline markers (one per real employment entry), hover states on interactive rows, the light-bar position indicator. Clears 4.5:1 contrast against the paper ground at small text sizes. A finish-review pass found it applied unconditionally (not state-marking) on the logo wordmark, every nav prefix at rest, and every Processing Log date — all three were corrected to `--ink-dim`/`--ink-faint`; only the footer's "Processed" stamp keeps a standing, non-state-dependent use of the accent, as the system's one deliberate exception (a real stamp is a singular authenticating mark by nature).
+- **Grease-Pencil Rust, Dim** (`#93392a`): the pressed/hover fill for the accent when it needs to sit *behind* light text (e.g. the card play-button hover fill), never used as a standalone accent.
 
 ### Neutral
-- **Light-Table Paper** (`#ece5d3`): the page ground throughout. Warm cream, never pure white — deliberately reads as illuminated paper, not a screen background.
-- **Paper Shadow** (`#d9cfb0`): the recessed/hover tone for paper-ground rows (service list, contact list) — one step darker than the base paper, used only on `:hover`/`:focus-visible`.
-- **Steel Dark** (`#302d27`): the light-bar's track color — the one place the system references the physical light-table hardware rather than the paper or the footage.
-- **Ink** (`#1c1911`): primary text, borders, and the grid/card structural lines. Warm near-black, not pure `#000`.
-- **Ink Dim** (`#56503e`): secondary body text (descriptions, role copy, lede paragraphs).
-- **Ink Faint** (`#6b6450`): small mono labels only (frame numbers, spec codes, footer). Corrected from a lighter `#7a7259` specifically to clear 4.5:1 at the small sizes it's actually used at — never use a lighter faint tone for functional text.
-- **Frame Void** (`#1b1914`): the background for any unloaded/placeholder video frame — the "no footage loaded yet" state, and the video modal/viewer stage backdrop.
-- **On Dark** (`#ece5d3`): paper-cream text/labels set on top of `--frame-void` or card thumbnails (frame numbers, play-icon color).
+- **Light-Table Paper** (`#e9e7e1`): the page ground throughout. Cool, desaturated off-white, never pure white and never warm cream — reads as illuminated paper on a cool light table, not a screen background or a lifestyle-brand backdrop.
+- **Paper Shadow** (`#dcd9d1`): the recessed/hover tone for paper-ground rows (service list, contact list) — one step darker than the base paper, used only on `:hover`/`:focus-visible`.
+- **Steel Dark** (`#26251f`): the light-bar's track color — the one place the system references the physical light-table hardware rather than the paper or the footage.
+- **Ink** (`#171717`): primary text, borders, and the grid/card structural lines. Near-black, not pure `#000`.
+- **Ink Dim** (`#676662`): secondary body text (descriptions, role copy, lede paragraphs).
+- **Ink Faint** (`#57564f`): small mono labels only (frame numbers, spec codes, footer). Kept close in value to Ink Dim rather than lightened, specifically to clear 4.5:1 at the small sizes it's actually used at and to read crisp/technical rather than washed-out — never use a lighter faint tone for functional text.
+- **Frame Void** (`#141412`): the background for any unloaded/placeholder video frame — the "no footage loaded yet" state, and the video modal/viewer stage backdrop.
+- **On Dark** (`#f2f0eb`): light text/labels set on top of `--frame-void` or card thumbnails (frame numbers, play-icon color).
 
 ### Named Rules
-**The One Mark Rule.** The grease-orange accent appears only where it marks something real — an active link, a hover state, a position indicator. It never fills a large decorative area and never appears twice in the same place for emphasis alone. If you're reaching for the accent to make something "pop" rather than to mark a real state, don't.
+**The One Mark Rule.** The rust accent appears only where it marks something real — an active link, a hover state, a position indicator. It never fills a large decorative area and never appears twice in the same place for emphasis alone. If you're reaching for the accent to make something "pop" rather than to mark a real state, don't.
 
-**The Warm Neutral Rule.** Every neutral in the system (paper, ink, ink-dim, ink-faint) carries the same warm, slightly brown-green undertone — never a cool or pure gray. A neutral that doesn't share this bias is off-system.
+**The Cool Neutral Rule.** Every neutral in the system (paper, ink, ink-dim, ink-faint) carries the same cool, desaturated undertone — never a warm cream/brown bias. A neutral that leans warm is off-system.
 
 ## Typography
 
@@ -152,7 +152,7 @@ Square corners throughout — no border-radius on cards, frames, or containers, 
 - **Format Tag:** each card's info panel carries a small mono `.card__format` label between the title and description (`Commercial`, `Social & Beauty`, `Cinematic Brand Film`, `Motion Graphics`, `Longform`) — real per-project classification, not decoration, and the mechanism that makes "range across formats" legible at a glance across the grid rather than only asserted once in the hero copy.
 
 ### Navigation
-- **Style:** fixed "spine" bar, paper-cream gradient fading to transparent on scroll. Tabs are mono, uppercase, `0.75rem`, each prefixed by its real frame number (`01`, `02`...) via `data-frame` + `::before` — recognition through real indexing, not decoration.
+- **Style:** fixed "spine" bar, paper-toned gradient fading to transparent on scroll. Tabs are mono, uppercase, `0.75rem`, each prefixed by its real frame number (`01`, `02`...) via `data-frame` + `::before` — recognition through real indexing, not decoration.
 - **States:** default `--ink-dim` with an `--ink-faint` frame-number prefix; hover/focus `--ink` with a growing 1px underline in `--ink`. **Current** (scroll-position-driven via IntersectionObserver, `.is-current`): frame-number prefix and underline both switch to `--grease` — the one legitimate standing use of the accent in navigation, because it marks a real state (where the visitor actually is), not decoration.
 - **Mobile:** full-screen overlay panel, slide-in from the right.
 
@@ -168,7 +168,7 @@ A single giant italic Alegreya numeral (`clamp(9rem, 24vw, 20rem)`, `4%` opacity
 ## Do's and Don'ts
 
 ### Do:
-- **Do** keep the grease accent (`#a83c09`) rare — active states, links, the light-bar indicator, the current nav tab. Nothing else.
+- **Do** keep the grease accent (`#b74a32`) rare — active states, links, the light-bar indicator, the current nav tab. Nothing else.
 - **Do** keep every functional label at or above `0.7rem` (11.2px).
 - **Do** vary each new section's opening composition rather than repeating the same kicker-then-heading template — the system's whole point is refusing that repetition.
 - **Do** keep the work grid's card count a multiple of its column count (4 desktop / 2 tablet) so the last row never leaves a trailing empty void.

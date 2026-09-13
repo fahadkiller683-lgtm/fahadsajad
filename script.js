@@ -88,8 +88,8 @@
   function updateNavBg() {
     if (!nav) return;
     nav.style.background = window.scrollY > 40
-      ? 'linear-gradient(to bottom, rgba(236,229,211,.96), rgba(236,229,211,.85) 85%, transparent)'
-      : 'linear-gradient(to bottom, rgba(236,229,211,.94), rgba(236,229,211,.75) 80%, transparent)';
+      ? 'linear-gradient(to bottom, rgba(233,231,225,.96), rgba(233,231,225,.85) 85%, transparent)'
+      : 'linear-gradient(to bottom, rgba(233,231,225,.94), rgba(233,231,225,.75) 80%, transparent)';
   }
   window.addEventListener('scroll', updateNavBg, { passive: true });
   updateNavBg();

@@ -415,7 +415,6 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
 }
 .viewer__plate h2{
   font-size:clamp(1.8rem,3.6vw,2.6rem);
-  font-style:italic;
 }
 .viewer__plate .code{
   font-family:var(--f-mono);
@@ -469,7 +468,6 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
 }
 .sheet__head h2{
   font-size:clamp(2rem,4.4vw,3.2rem);
-  font-style:italic;
 }
 .sheet__head .code{
   font-family:var(--f-mono);
@@ -550,7 +548,6 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
 }
 .card__info h3{
   font-size:1.05rem;
-  font-style:italic;
   margin-bottom:.35rem;
 }
 .card__format{
@@ -615,7 +612,7 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
   font-variant-numeric:tabular-nums;
 }
 .log__role{ min-width:0; }
-.log__role h3{ font-size:1.1rem; font-style:italic; margin-bottom:.2rem; }
+.log__role h3{ font-size:1.1rem; margin-bottom:.2rem; }
 .log__role .client{
   font-family:var(--f-mono);
   font-size:.75rem;
@@ -675,7 +672,7 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
 }
 .index__icon svg{ width:100%; height:100%; }
 .index__row:hover .index__icon{ color:var(--grease); transform:translateY(-2px); }
-.index__body h3{ font-size:1.1rem; font-style:italic; margin-bottom:.4rem; }
+.index__body h3{ font-size:1.1rem; margin-bottom:.4rem; }
 .index__body p{ color:var(--ink-dim); font-size:.9rem; line-height:1.6; max-width:56ch; }
 
 /* ---------------- Slate (Contact, Sheet 006) — quiet close ---------------- */
@@ -685,7 +682,6 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
 }
 .slate h2{
   font-size:clamp(1.8rem,4vw,2.6rem);
-  font-style:italic;
   max-width:16ch;
   margin-bottom:1rem;
 }

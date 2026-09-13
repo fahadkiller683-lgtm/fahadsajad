@@ -100,22 +100,23 @@ Cool, desaturated, and restrained — one saturated rust accent against a near-m
 
 ## Typography
 
-**Display Font:** Alegreya (italic weight for headlines), with Georgia, serif fallback
+**Display Font:** Alegreya (italic for the hero/branding/oversized numerals, upright Medium for section and item headings), with Georgia, serif fallback
 **Body Font:** Hanken Grotesk, with ui-sans-serif, system-ui, sans-serif fallback
 **Label/Mono Font:** Martian Mono, with ui-monospace, SF Mono, Menlo, monospace fallback
 
-**Character:** An editorial serif with real italic character (not a training-data default like Playfair or Fraunces) paired with a clean humanist grotesque for reading text and a technical mono for data labels — the same three-role split a real photo/print publication would use for a title, a caption, and a spec sheet.
+**Character:** An editorial serif with real italic character (not a training-data default like Playfair or Fraunces) paired with a clean humanist grotesque for reading text and a technical mono for data labels — the same three-role split a real photo/print publication would use for a title, a caption, and a spec sheet. Italic is deliberately scarce: it marks the hero, the logotype, and the oversized sheet numerals as the system's expressive voice, rather than being the default style of every heading.
 
 ### Hierarchy
 - **Display** (500 weight, `clamp(2.6rem, 5.6vw, 4.6rem)`, 1.04 line-height, italic): the hero headline only. `-0.01em` letter-spacing.
-- **Headline** (500 weight, `clamp(1.8rem–3.2rem)`, italic): every section's `h2` — "Featured Cut," "Selected Work," "Processing Log," "Spec Index," "Let's Work Together." Always italic; never upright at this weight.
+- **Headline** (500 weight, `clamp(1.8rem–3.2rem)`, upright): every section's `h2` — "Featured Cut," "Selected Work," "Processing Log," "Spec Index," "Let's Work Together." Non-italic Alegreya Medium.
+- **Item title** (500 weight, `1.05–1.1rem`, upright): project titles, job titles, service titles (`h3` inside cards, the processing log, and the spec index). Non-italic Alegreya Medium, same family as the headline for a consistent serif voice against the sans body copy.
 - **Body** (400 weight, `1rem`, 1.6 line-height): lede copy, card descriptions, service/contact descriptions. Max-width capped around 54–56ch.
 - **Label** (400 weight, `0.7–0.75rem`, uppercase, `0.04–0.08em` tracking, mono): frame numbers, spec codes, nav tabs, contact labels, footer. The floor for this role is 11px (`.7rem`) — nothing in the mono label role drops below it.
 
 ### Named Rules
 **The 11px Floor Rule.** No functional mono label renders below `0.7rem` (11.2px) at the page's base 16px root. This was a real defect found and fixed during the finish review (22 instances were originally below the floor) — never reintroduce a sub-11px label size.
 
-**The Italic-Only Headline Rule.** Every `h2`/`h1` in the display role renders italic. An upright display heading is off-system; if a section needs to feel quieter (like Contact), reduce its size and alignment, not its italic.
+**The Scarce Italic Rule.** Italic Alegreya is reserved for the hero headline, the logotype/branding mark (spine mark, loader mark), and the oversized low-opacity sheet numerals (`--hero__num`, `--index__num`) — the system's expressive accent, not its default heading style. Every section heading and every item title (project/job/service titles, the contact heading) renders upright Alegreya Medium instead. If a section needs to feel quieter (like Contact), reduce its size and alignment, not its italic — there's no italic left to remove there in the first place.
 
 ## Layout
 
@@ -123,7 +124,7 @@ Sections are called "sheets," each a `.sheet` block with `max-width: 1440px`, ce
 
 The work grid locks to a fixed column count — 4 columns desktop, 2 tablet (≤860px) — rather than a fluid `auto-fit`. This is deliberate: the grid holds exactly 8 real project cards, and 4/2/1 are the only column counts that divide 8 evenly with no trailing empty row. Any future addition to the grid should keep the total card count a multiple of the column count, or the column count should be revisited.
 
-Each section varies its own composition rather than repeating one template: the hero is a single, large-scale typographic statement — no supporting imagery competing with it, proof of work starts in the Featured Cut and grid that follow; the work grid is a strict card grid, each card format-tagged (Commercial / Social & Beauty / Cinematic Brand Film / Motion Graphics / Longform) so range reads at a glance, not just in the hero's own claim; the experience section is a tabular "processing log" with its own left-margin timeline rule and marker per entry; the services section is a full-bleed row list with a giant low-opacity background numeral; the contact section inverts to right-aligned and quieter than every section before it. No two sections share the same opener structure.
+Each section varies its own composition rather than repeating one template: the hero is a single, large-scale typographic statement — no supporting imagery competing with it, proof of work starts in the Featured Cut and grid that follow; the work grid is a strict card grid, each card format-tagged (Commercial / Social & Beauty / Cinematic Brand Film / Motion Graphics / Longform) so range reads at a glance, not just in the hero's own claim; the experience section is a tabular "processing log" with its own left-margin timeline rule and marker per entry; the services section is a full-bleed row list with a giant low-opacity background numeral; the contact section is left-aligned and quieter than every section before it. No two sections share the same opener structure.
 
 ## Elevation & Depth
 
@@ -178,5 +179,5 @@ A single giant italic Alegreya numeral (`clamp(9rem, 24vw, 20rem)`, `4%` opacity
 - **Don't** add a second accent color. The system is built around exactly one.
 - **Don't** use a symmetrical/zero-offset shadow anywhere — every shadow needs a real vertical offset.
 - **Don't** use a Unicode glyph or emoji as an icon — draw it as an SVG matching the existing stroke weight.
-- **Don't** set a display heading upright (non-italic) — italic is load-bearing to the system's voice.
+- **Don't** set the hero headline, the logotype, or the oversized sheet numerals upright — italic is load-bearing to the system's voice there. Don't set a section heading or item title italic, either — that's the opposite mistake.
 - **Don't** reintroduce timecode, REC-dot, film-grain, or scrubber-as-video-player motifs — that is the explicitly rejected prior world.

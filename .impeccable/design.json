@@ -17,7 +17,7 @@
     },
     "typographyMeta": {
       "display": { "displayName": "Display", "purpose": "Hero headline only." },
-      "headline": { "displayName": "Headline", "purpose": "Every section h2, always italic." },
+      "headline": { "displayName": "Headline", "purpose": "Every section h2 and item title (project/job/service), upright Alegreya Medium — not italic." },
       "body": { "displayName": "Body", "purpose": "Lede copy and descriptions, max ~55ch." },
       "label": { "displayName": "Label", "purpose": "Mono functional labels — frame numbers, spec codes, nav tabs. Floor: 0.7rem." }
     },
@@ -50,7 +50,7 @@
       "refersTo": "card",
       "description": "A contact-sheet frame — grayscale thumbnail that reveals color on hover, real frame number, SVG play badge.",
       "html": "<article class=\"ds-card\"><button class=\"ds-card__frame\" type=\"button\"><span class=\"ds-card__bg\"></span><span class=\"ds-card__fnum\">01</span><span class=\"ds-card__play\"><svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 5.5L18.5 12L7 18.5V5.5z\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linejoin=\"round\"/></svg></span></button><div class=\"ds-card__info\"><h3>Project Title</h3><p>One or two lines describing the project.</p></div></article>",
-      "css": ".ds-card { background: #e9e7e1; display: flex; flex-direction: column; } .ds-card__frame { position: relative; aspect-ratio: 4/3; overflow: hidden; width: 100%; background: #141412; cursor: pointer; } .ds-card__bg { position: absolute; inset: 0; background-size: cover; background-position: center; filter: grayscale(1) contrast(1.05); transition: filter 0.6s, transform 0.7s; } .ds-card__frame:hover .ds-card__bg { filter: grayscale(0) contrast(1.05); transform: scale(1.06); } .ds-card__fnum { position: absolute; left: 0.6rem; top: 0.6rem; font-family: 'Martian Mono', monospace; font-size: 0.75rem; color: #f2f0eb; } .ds-card__play { position: absolute; right: 0.7rem; bottom: 0.7rem; width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(242,240,235,.55); color: #f2f0eb; display: flex; align-items: center; justify-content: center; opacity: 0.85; } .ds-card__play svg { width: 13px; height: 13px; } .ds-card__frame:hover .ds-card__play { opacity: 1; background: #93392a; border-color: #93392a; } .ds-card__info { padding: 1.1rem 1.2rem 1.3rem; border-top: 1px solid #d9d6ce; } .ds-card__info h3 { font-family: 'Alegreya', serif; font-style: italic; font-size: 1.05rem; margin: 0 0 0.4rem; } .ds-card__info p { font-size: 0.85rem; color: #676662; line-height: 1.55; margin: 0; }"
+      "css": ".ds-card { background: #e9e7e1; display: flex; flex-direction: column; } .ds-card__frame { position: relative; aspect-ratio: 4/3; overflow: hidden; width: 100%; background: #141412; cursor: pointer; } .ds-card__bg { position: absolute; inset: 0; background-size: cover; background-position: center; filter: grayscale(1) contrast(1.05); transition: filter 0.6s, transform 0.7s; } .ds-card__frame:hover .ds-card__bg { filter: grayscale(0) contrast(1.05); transform: scale(1.06); } .ds-card__fnum { position: absolute; left: 0.6rem; top: 0.6rem; font-family: 'Martian Mono', monospace; font-size: 0.75rem; color: #f2f0eb; } .ds-card__play { position: absolute; right: 0.7rem; bottom: 0.7rem; width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(242,240,235,.55); color: #f2f0eb; display: flex; align-items: center; justify-content: center; opacity: 0.85; } .ds-card__play svg { width: 13px; height: 13px; } .ds-card__frame:hover .ds-card__play { opacity: 1; background: #93392a; border-color: #93392a; } .ds-card__info { padding: 1.1rem 1.2rem 1.3rem; border-top: 1px solid #d9d6ce; } .ds-card__info h3 { font-family: 'Alegreya', serif; font-weight: 500; font-size: 1.05rem; margin: 0 0 0.4rem; } .ds-card__info p { font-size: 0.85rem; color: #676662; line-height: 1.55; margin: 0; }"
     },
     {
       "name": "Navigation Tab",
@@ -63,11 +63,11 @@
   ],
   "narrative": {
     "northStar": "The Proof Sheet",
-    "overview": "The site is a working contact sheet reviewed on a light table, not a cinematic-viewer skin. Every section is a numbered \"sheet\" in a proof book: frame numbers, spec codes, and a grease-pencil review mark carry real information the way they would on an editor's actual proof sheet, not as decoration borrowed from the genre. The system explicitly rejects the video-editor-portfolio default (REC dot, running timecode, film grain, tally-light red on black) that the incumbent design used before this redesign — that look is the confirmed visual anti-reference.\n\nThe palette stays cool and desaturated at rest — off-white and near-black rather than cream and brown, closer to a film lab or print-production sheet than a warm lifestyle brand; the single rust accent is rare and functional; the display type is an italic serif with real editorial character rather than a system sans or an overused \"safe\" display face. Depth is expressed through material contrast (paper vs. near-black frame-void) and thin, deliberate borders rather than soft shadow.",
+    "overview": "The site is a working contact sheet reviewed on a light table, not a cinematic-viewer skin. Every section is a numbered \"sheet\" in a proof book: frame numbers, spec codes, and a grease-pencil review mark carry real information the way they would on an editor's actual proof sheet, not as decoration borrowed from the genre. The system explicitly rejects the video-editor-portfolio default (REC dot, running timecode, film grain, tally-light red on black) that the incumbent design used before this redesign — that look is the confirmed visual anti-reference.\n\nThe palette stays cool and desaturated at rest — off-white and near-black rather than cream and brown, closer to a film lab or print-production sheet than a warm lifestyle brand; the single rust accent is rare and functional; the display type is a serif with real editorial character rather than a system sans or an overused \"safe\" display face, with italic reserved as a scarce expressive accent (hero, logotype, oversized numerals) rather than the default heading style. Depth is expressed through material contrast (paper vs. near-black frame-void) and thin, deliberate borders rather than soft shadow.",
     "keyCharacteristics": [
       "Cool, desaturated off-white light-table paper as the constant ground, never pure white, pure black, or warm cream",
       "One accent color, used only where it marks something real (a link, an active state, a position indicator)",
-      "Italic serif display type carries the personality; mono type carries data",
+      "Serif display type carries the personality (italic reserved for the hero, logotype, and oversized numerals; upright Medium for all other headings/titles); mono type carries data",
       "Frame/sheet numbering is real information architecture, not a decorative device",
       "Flat at rest; sharp/thin borders over soft shadow; shadows only appear as a functional response to interaction, and stay tight rather than diffuse"
     ],
@@ -75,7 +75,7 @@
       { "name": "The One Mark Rule", "body": "The rust accent appears only where it marks something real — an active link, a hover state, a position indicator. It never fills a large decorative area and never appears twice in the same place for emphasis alone.", "section": "colors" },
       { "name": "The Cool Neutral Rule", "body": "Every neutral in the system carries the same cool, desaturated undertone — never a warm cream/brown bias.", "section": "colors" },
       { "name": "The 11px Floor Rule", "body": "No functional mono label renders below 0.7rem (11.2px). 22 instances were found below this floor and fixed during the finish review — never reintroduce a sub-11px label size.", "section": "typography" },
-      { "name": "The Italic-Only Headline Rule", "body": "Every h2/h1 in the display role renders italic. An upright display heading is off-system.", "section": "typography" },
+      { "name": "The Scarce Italic Rule", "body": "Italic Alegreya is reserved for the hero headline, the logotype/branding mark, and the oversized low-opacity sheet numerals. Every section heading and item title (project/job/service titles, the contact heading) renders upright Alegreya Medium instead.", "section": "typography" },
       { "name": "The Flat-By-Default Rule", "body": "Surfaces are flat at rest. Shadows stay tight and functional (a real offset, never a diffuse glow), and thin borders/grid lines carry most of the structural weight instead.", "section": "elevation" }
     ],
     "dos": [
@@ -90,7 +90,7 @@
       "Don't add a second accent color. The system is built around exactly one.",
       "Don't use a diffuse/soft-glow shadow anywhere — keep any shadow tight, with a real small offset.",
       "Don't use a Unicode glyph or emoji as an icon — draw it as an SVG matching the existing stroke weight.",
-      "Don't set a display heading upright (non-italic) — italic is load-bearing to the system's voice.",
+      "Don't set the hero headline, logotype, or oversized sheet numerals upright — italic is load-bearing there. Don't set a section heading or item title italic — that's the opposite mistake.",
       "Don't reintroduce timecode, REC-dot, film-grain, or scrubber-as-video-player motifs — that is the explicitly rejected prior world.",
       "Don't let the neutrals drift warm (cream/brown) — the system was deliberately corrected away from that toward a cool, desaturated ground."
     ]

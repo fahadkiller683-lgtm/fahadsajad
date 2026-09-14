@@ -284,6 +284,15 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
   pointer-events:none;
   user-select:none;
 }
+.hero__kicker{
+  display:block;
+  font-family:var(--f-mono);
+  font-size:.75rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  margin-bottom:.9rem;
+}
 .hero__title{
   font-size:clamp(3.4rem,9vw,7.2rem);
   font-style:italic;

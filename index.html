@@ -21,25 +21,6 @@
 </head>
 <body>
 
-<!-- Recolors every project thumbnail into the site's two-tone
-     ink/paper palette, so a raw YouTube frame grab (odd crop, random
-     color cast) always reads as one consistent graded look instead
-     of a literal screenshot. Used by .card__frame-bg — no edits needed. -->
-<svg aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
-  <filter id="duotoneCard" color-interpolation-filters="sRGB">
-    <feColorMatrix type="matrix"
-      values="0.2126 0.7152 0.0722 0 0
-              0.2126 0.7152 0.0722 0 0
-              0.2126 0.7152 0.0722 0 0
-              0 0 0 1 0"/>
-    <feComponentTransfer>
-      <feFuncR type="table" tableValues="0.0784 0.9529"/>
-      <feFuncG type="table" tableValues="0.0745 0.9451"/>
-      <feFuncB type="table" tableValues="0.0588 0.9255"/>
-    </feComponentTransfer>
-  </filter>
-</svg>
-
 <!-- ============================================================
      HOW THIS FILE IS ORGANIZED
      Every part you might want to edit has a comment right above

@@ -59,15 +59,7 @@
 }
 
 *,*::before,*::after{ box-sizing:border-box; }
-html{ scroll-behavior:smooth; scroll-snap-type:y proximity; }
-html.is-scrubbing{ scroll-snap-type:none; scroll-behavior:auto; }
-/* Each top-level section settles like a cut between shots when you
-   scroll near it ("proximity", not "mandatory", so scrolling never
-   feels trapped). scroll-margin-top clears the sticky scrub bar. */
-.cover, .hero, .section, .divider, .footer{
-  scroll-snap-align:start;
-  scroll-margin-top:84px;
-}
+html{ scroll-behavior:smooth; }
 body{
   margin:0;
   background:var(--bg);
@@ -119,80 +111,40 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
   transform:translateY(0);
 }
 
-/* ---------------- Nav / scrub bar ----------------
-   Styled like a video editor's timeline scrubber: .scrub__track is
-   the draggable timeline, .scrub__line + .scrub__playhead are purely
-   decorative (pointer-events:none) so the real <a> stops underneath
-   stay fully clickable/keyboard-focusable. */
-.scrub{
+/* ---------------- Nav ---------------- */
+.nav{
   position:sticky;
   top:0;
   z-index:140;
   display:flex;
   align-items:center;
-  gap:clamp(1rem,3vw,2rem);
-  padding:1.1rem clamp(1.25rem,5vw,3rem);
+  justify-content:space-between;
+  gap:1.5rem;
+  padding:1.4rem clamp(1.25rem,5vw,3rem);
   background:rgba(18,17,16,.85);
   backdrop-filter:blur(10px);
   border-bottom:1px solid var(--line);
 }
-.scrub__logo{
-  flex-shrink:0;
+.nav__logo{
   font-family:var(--f-display);
   font-weight:700;
   font-size:1.1rem;
   letter-spacing:-.01em;
 }
-.scrub__track{
-  position:relative;
-  flex:1;
+.nav__links{
   display:flex;
-  align-items:center;
-  justify-content:space-between;
-  height:34px;
-  cursor:pointer;
-  touch-action:none;
+  gap:2rem;
+  margin-right:auto;
+  margin-left:2.5rem;
 }
-.scrub__line{
-  position:absolute;
-  left:0; right:0; top:50%;
-  height:1px;
-  background:var(--line);
-  transform:translateY(-50%);
-  pointer-events:none;
-}
-.scrub__playhead{
-  position:absolute;
-  top:50%; left:0%;
-  width:2px; height:18px;
-  background:var(--ink);
-  transform:translate(-50%,-50%);
-  pointer-events:none;
-  transition:background var(--dur-s) var(--ease);
-}
-@supports (animation-timeline: scroll()){
-  .scrub__playhead{
-    animation:scrubProgress linear forwards;
-    animation-timeline:scroll(root block);
-  }
-}
-@keyframes scrubProgress{ from{ left:0%; } to{ left:100%; } }
-.scrub__stop{
-  position:relative;
-  z-index:1;
-  font-family:var(--f-mono);
-  font-size:.74rem;
-  letter-spacing:.03em;
-  padding:.4rem .6rem;
-  background:var(--bg);
+.nav__links a{
+  font-size:.85rem;
   color:var(--ink-dim);
   transition:color var(--dur-s) var(--ease);
 }
-.scrub__stop:hover,
-.scrub__stop:focus-visible{ color:var(--ink); }
-.scrub__stop.is-current{ color:var(--ink); font-weight:500; }
-.scrub__cta{
-  flex-shrink:0;
+.nav__links a:hover,
+.nav__links a:focus-visible{ color:var(--ink); }
+.nav__cta{
   font-family:var(--f-mono);
   font-size:.78rem;
   letter-spacing:.03em;
@@ -202,8 +154,27 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
   color:var(--chip-text);
   transition:transform var(--dur-s) var(--ease), opacity var(--dur-s) var(--ease);
 }
-.scrub__cta:hover,
-.scrub__cta:focus-visible{ transform:scale(1.04); opacity:.9; }
+.nav__cta:hover,
+.nav__cta:focus-visible{ transform:scale(1.04); opacity:.9; }
+.nav__toggle{
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  padding:.5rem;
+  min-width:44px;
+  min-height:44px;
+  z-index:160;
+}
+.nav__toggle span{
+  width:22px; height:1.5px;
+  background:var(--ink);
+  transition:transform var(--dur-s) var(--ease), opacity var(--dur-s) var(--ease);
+}
+.nav__toggle.open span:nth-child(1){ transform:translateY(6.5px) rotate(45deg); }
+.nav__toggle.open span:nth-child(2){ opacity:0; }
+.nav__toggle.open span:nth-child(3){ transform:translateY(-6.5px) rotate(-45deg); }
 
 /* ---------------- Corner marks (repeated per section) ---------------- */
 /* Small frame-corner brackets — like the crop marks on a video
@@ -388,15 +359,6 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
   margin:0 auto;
   padding:clamp(4rem,9vw,7rem) clamp(1.5rem,6vw,5rem) clamp(4rem,9vw,7rem);
 }
-.hero__layout{
-  display:grid;
-  grid-template-columns:1.1fr .9fr;
-  gap:clamp(2.5rem,5vw,4.5rem);
-  align-items:center;
-}
-@media (max-width:900px){
-  .hero__layout{ grid-template-columns:1fr; }
-}
 .hero__label{
   font-family:var(--f-mono);
   font-size:.78rem;
@@ -405,11 +367,11 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
   margin-bottom:1.25rem;
 }
 .hero__title{
-  font-size:clamp(2.6rem,5.6vw,5rem);
+  font-size:clamp(2.8rem,7.2vw,6.4rem);
   font-weight:900;
-  line-height:.99;
+  line-height:.98;
   letter-spacing:-.03em;
-  max-width:14ch;
+  max-width:16ch;
 }
 .hero__row{
   display:flex;
@@ -426,81 +388,6 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
   max-width:38ch;
   font-size:1.02rem;
   line-height:1.65;
-}
-
-/* ---------------- Raw/graded comparison (hero) ----------------
-   A real project frame shown twice: a desaturated/flat "raw" layer
-   underneath, and a richer "graded" layer clipped by --split (a
-   percentage custom property) on top. Dragging the handle, clicking
-   anywhere in the frame, or using the arrow keys while the handle is
-   focused all move --split. */
-.grade__frame{
-  position:relative;
-  aspect-ratio:16/10;
-  overflow:hidden;
-  border:1px solid var(--line);
-  background:#000;
-  user-select:none;
-  touch-action:none;
-  cursor:ew-resize;
-}
-.grade__img{
-  position:absolute; inset:0;
-  width:100%; height:100%;
-  object-fit:cover;
-  display:block;
-  pointer-events:none;
-}
-.grade__img--raw{ filter:grayscale(.8) contrast(.82) brightness(.92) saturate(.55); }
-.grade__final{
-  position:absolute; inset:0;
-  clip-path:inset(0 calc(100% - var(--split, 50%)) 0 0);
-}
-.grade__img--final{ filter:contrast(1.1) saturate(1.3) brightness(1.03); }
-.grade__tag{
-  position:absolute; top:.8rem;
-  z-index:1;
-  font-family:var(--f-mono);
-  font-size:.66rem;
-  letter-spacing:.06em;
-  text-transform:uppercase;
-  padding:.3rem .6rem;
-  background:rgba(18,17,16,.65);
-  color:var(--ink);
-  border:1px solid rgba(243,241,236,.22);
-  pointer-events:none;
-}
-.grade__tag--raw{ left:.8rem; }
-.grade__tag--final{ right:.8rem; }
-.grade__handle{
-  position:absolute;
-  top:0; bottom:0;
-  left:var(--split, 50%);
-  width:2px;
-  background:var(--ink);
-  transform:translateX(-50%);
-  z-index:2;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.grade__grip{
-  width:34px; height:34px;
-  border-radius:50%;
-  background:var(--chip-bg);
-  color:var(--chip-text);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  box-shadow:0 2px 10px rgba(0,0,0,.4);
-}
-.grade__handle:focus-visible .grade__grip{ outline:2px solid var(--ink); outline-offset:2px; }
-.grade__caption{
-  margin-top:.9rem;
-  font-family:var(--f-mono);
-  font-size:.72rem;
-  letter-spacing:.03em;
-  color:var(--ink-faint);
 }
 /* ---------------- Featured project ---------------- */
 .featured__title{
@@ -1031,17 +918,27 @@ a.fact__value:focus-visible{ color:var(--ink-dim); }
 }
 
 @media (max-width:760px){
-  .scrub{ gap:.85rem; padding:.9rem clamp(1.25rem,5vw,3rem); }
-  .scrub__cta{ display:none; }
-  .scrub__stop{ font-size:.68rem; padding:.4rem .4rem; }
+  .nav__links{
+    position:fixed;
+    inset:0;
+    top:64px;
+    z-index:150;
+    background:var(--bg);
+    flex-direction:column;
+    align-items:flex-start;
+    margin:0;
+    padding:2rem;
+    gap:1.5rem;
+    transform:translateX(100%);
+    transition:transform var(--dur-m) var(--ease);
+  }
+  .nav__links.open{ transform:translateX(0); }
+  .nav__links a{ font-size:1.3rem; }
+  .nav__cta{ display:none; }
+  .nav__toggle{ display:flex; }
   .hero__row{ align-items:flex-start; flex-direction:column; }
   .modal__box{ width:94vw; }
   .modal__close{ top:-3rem; right:0; }
-}
-
-@media (max-width:480px){
-  .scrub__logo{ font-size:.95rem; }
-  .scrub__stop{ font-size:.64rem; padding:.4rem .15rem; }
 }
 
 @media (max-width:520px){
@@ -1052,7 +949,7 @@ a.fact__value:focus-visible{ color:var(--ink-dim); }
 
 /* ---------------- Reduced motion ---------------- */
 @media (prefers-reduced-motion: reduce){
-  html{ scroll-behavior:auto; scroll-snap-type:none; }
+  html{ scroll-behavior:auto; }
   [data-reveal]{ transition:none; opacity:1; transform:none; }
-  *:not(.scrub__playhead){ animation-duration:.001s !important; transition-duration:.001s !important; }
+  *{ animation-duration:.001s !important; transition-duration:.001s !important; }
 }

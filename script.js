@@ -13,110 +13,21 @@
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ---------- Scrub-bar nav: playhead position ----------
-     The playhead's position (how far across the track it sits)
-     mirrors how far down the page you've scrolled, like a video
-     timeline's playhead. Driven by CSS scroll-driven animation where
-     supported (zero JS cost); falls back to a throttled scroll
-     listener in older browsers. */
-  const scrubPlayhead = document.getElementById('scrubPlayhead');
-  const supportsScrollTimeline = typeof CSS !== 'undefined' && CSS.supports && CSS.supports('animation-timeline: scroll()');
-  if (scrubPlayhead && !supportsScrollTimeline) {
-    let ticking = false;
-    const updatePlayhead = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
-      scrubPlayhead.style.left = pct + '%';
-      ticking = false;
-    };
-    window.addEventListener('scroll', () => {
-      if (!ticking) { requestAnimationFrame(updatePlayhead); ticking = true; }
-    }, { passive: true });
-    updatePlayhead();
-  }
-
-  /* ---------- Scrub-bar nav: drag/click to jump anywhere ----------
-     Clicking or dragging across the track scrubs the page, like
-     scrubbing a video timeline. Clicking directly on a stop (Work,
-     Experience, etc.) still works as a normal link. */
-  const scrubTrack = document.getElementById('scrubTrack');
-  if (scrubTrack) {
-    let dragging = false;
-    const scrubTo = (clientX, smooth) => {
-      const rect = scrubTrack.getBoundingClientRect();
-      const pct = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      window.scrollTo({ top: pct * max, behavior: smooth && !prefersReduced ? 'smooth' : 'auto' });
-    };
-    scrubTrack.addEventListener('pointerdown', (e) => {
-      if (e.target.closest('.scrub__stop')) return; // let the real link handle it
-      dragging = true;
-      document.documentElement.classList.add('is-scrubbing'); // suspend scroll-snap while dragging
-      scrubTrack.setPointerCapture(e.pointerId);
-      scrubTo(e.clientX, false);
+  /* ---------- Mobile nav toggle ---------- */
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      navToggle.classList.toggle('open', isOpen);
+      navToggle.setAttribute('aria-expanded', String(isOpen));
     });
-    scrubTrack.addEventListener('pointermove', (e) => {
-      if (dragging) scrubTo(e.clientX, false);
-    });
-    ['pointerup', 'pointercancel'].forEach(ev => scrubTrack.addEventListener(ev, () => {
-      dragging = false;
-      document.documentElement.classList.remove('is-scrubbing');
-    }));
-  }
-
-  /* ---------- Scrub-bar nav: highlight the current section ---------- */
-  const scrubStops = document.querySelectorAll('.scrub__stop[href^="#"]');
-  if ('IntersectionObserver' in window && scrubStops.length) {
-    const stopFor = id => document.querySelector(`.scrub__stop[href="#${id}"]`);
-    const sectionIo = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        const stop = stopFor(entry.target.id);
-        if (!stop) return;
-        if (entry.isIntersecting) {
-          scrubStops.forEach(s => s.classList.remove('is-current'));
-          stop.classList.add('is-current');
-        }
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        navToggle.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
       });
-    }, { rootMargin: '-45% 0px -45% 0px' });
-    scrubStops.forEach(stop => {
-      const id = stop.getAttribute('href').slice(1);
-      const section = document.getElementById(id);
-      if (section) sectionIo.observe(section);
-    });
-  }
-
-  /* ---------- Hero raw/graded comparison slider ----------
-     Drag the handle (or click/tap anywhere in the frame) to reveal
-     more of the graded side vs. the raw side. Keyboard users can
-     focus the handle and use the arrow keys. */
-  const gradeFrame = document.getElementById('gradeFrame');
-  const gradeHandle = document.getElementById('gradeHandle');
-  if (gradeFrame && gradeHandle) {
-    const setSplit = (pct) => {
-      pct = Math.max(0, Math.min(100, pct));
-      gradeFrame.style.setProperty('--split', pct + '%');
-      gradeHandle.setAttribute('aria-valuenow', String(Math.round(pct)));
-    };
-    const setSplitFromPointer = (clientX) => {
-      const rect = gradeFrame.getBoundingClientRect();
-      setSplit(((clientX - rect.left) / rect.width) * 100);
-    };
-    let gradeDragging = false;
-    gradeFrame.addEventListener('pointerdown', (e) => {
-      gradeDragging = true;
-      gradeFrame.setPointerCapture(e.pointerId);
-      setSplitFromPointer(e.clientX);
-    });
-    gradeFrame.addEventListener('pointermove', (e) => {
-      if (gradeDragging) setSplitFromPointer(e.clientX);
-    });
-    ['pointerup', 'pointercancel'].forEach(ev => gradeFrame.addEventListener(ev, () => { gradeDragging = false; }));
-    gradeHandle.addEventListener('keydown', (e) => {
-      const current = parseFloat(gradeHandle.getAttribute('aria-valuenow')) || 50;
-      if (e.key === 'ArrowLeft') { setSplit(current - 5); e.preventDefault(); }
-      else if (e.key === 'ArrowRight') { setSplit(current + 5); e.preventDefault(); }
-      else if (e.key === 'Home') { setSplit(0); e.preventDefault(); }
-      else if (e.key === 'End') { setSplit(100); e.preventDefault(); }
     });
   }
 
@@ -219,7 +130,7 @@
       const target = document.querySelector(targetId);
       if (!target) return;
       e.preventDefault();
-      const offset = 84;
+      const offset = 70;
       const top = target.getBoundingClientRect().top + window.scrollY - offset;
       window.scrollTo({ top, behavior: prefersReduced ? 'auto' : 'smooth' });
     });

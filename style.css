@@ -670,12 +670,12 @@ a.fact__value:focus-visible{ color:var(--ink-dim); }
   z-index:0;
   background-size:cover;
   background-position:center;
-  filter:grayscale(1) contrast(1.05);
+  filter:url(#duotoneCard) contrast(1.05);
   transition:filter var(--dur-m) var(--ease), transform .7s var(--ease);
 }
 .card:hover .card__frame-bg,
 .card:focus-within .card__frame-bg{
-  filter:grayscale(0) contrast(1.05);
+  filter:url(#duotoneCard) contrast(1.18) brightness(1.05);
   transform:scale(1.06);
 }
 /* Fallback colors shown until a real YouTube thumbnail loads in

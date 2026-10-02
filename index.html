@@ -27,20 +27,27 @@
      don't need edits.
      ============================================================ -->
 
-<!-- NAV -->
-<header class="nav" id="nav">
+<!-- NAV / SCRUB BAR
+     Styled like a video-editor's timeline scrubber instead of a plain
+     nav bar: the track is the page's actual scroll progress, the
+     stops are real links (work normally for keyboard/screen readers),
+     and the whole track is click-and-drag to jump anywhere on the
+     page, like scrubbing a timeline. No edits needed beyond the
+     stop labels/links below, which map 1:1 to real section ids. -->
+<header class="scrub" id="nav">
   <!-- Replace this name if needed -->
-  <a href="#top" class="nav__logo">Fahad Sajad</a>
-  <nav class="nav__links" id="navLinks">
-    <a href="#work">Work</a>
-    <a href="#experience">Experience</a>
-    <a href="#services">Services</a>
-    <a href="#contact">Contact</a>
+  <a href="#top" class="scrub__logo">Fahad Sajad</a>
+
+  <nav class="scrub__track" id="scrubTrack" aria-label="Page sections">
+    <span class="scrub__line" aria-hidden="true"></span>
+    <span class="scrub__playhead" id="scrubPlayhead" aria-hidden="true"></span>
+    <a href="#work" class="scrub__stop" data-stop>Work</a>
+    <a href="#experience" class="scrub__stop" data-stop>Experience</a>
+    <a href="#services" class="scrub__stop" data-stop>Services</a>
+    <a href="#contact" class="scrub__stop" data-stop>Contact</a>
   </nav>
-  <a href="#contact" class="nav__cta">Hire me</a>
-  <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
+
+  <a href="#contact" class="scrub__cta">Hire me</a>
 </header>
 
 <main>
@@ -86,21 +93,49 @@
 <section class="hero">
   <span class="corner corner--tl" aria-hidden="true"></span>
   <span class="corner corner--tr" aria-hidden="true"></span>
-  <p class="hero__label">Video Editor</p>
 
-  <h1 class="hero__title" data-reveal>Footage becomes<br>a story in the edit.</h1>
+  <div class="hero__layout">
+    <div class="hero__copy">
+      <p class="hero__label">Video Editor</p>
 
-  <div class="hero__row">
-    <!-- Replace this intro line if you'd like to change how you're described -->
-    <p class="hero__role" data-reveal style="transition-delay:.1s">Professional Video Editor specializing in commercials, beauty content, social media, and cinematic storytelling.</p>
+      <h1 class="hero__title" data-reveal>Footage becomes<br>a story in the edit.</h1>
 
-    <!-- Main call-to-action. Scrolls down to the work grid. -->
-    <a href="#work" class="hero__cta" data-reveal style="transition-delay:.2s">
-      <span>See the work</span>
-      <span class="hero__cta-arrow" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </span>
-    </a>
+      <div class="hero__row">
+        <!-- Replace this intro line if you'd like to change how you're described -->
+        <p class="hero__role" data-reveal style="transition-delay:.1s">Professional Video Editor specializing in commercials, beauty content, social media, and cinematic storytelling.</p>
+
+        <!-- Main call-to-action. Scrolls down to the work grid. -->
+        <a href="#work" class="hero__cta" data-reveal style="transition-delay:.2s">
+          <span>See the work</span>
+          <span class="hero__cta-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <!-- RAW / GRADED COMPARISON
+         A real frame from the OVO Café edit, shown flat/ungraded on
+         one side and color graded on the other. Drag the handle (or
+         tap/click anywhere in the frame) to compare. To use a
+         different project's frame, replace both image src values
+         below with that project's YouTube thumbnail URL. -->
+    <div class="grade" data-reveal style="transition-delay:.15s">
+      <div class="grade__frame" id="gradeFrame" style="--split:50%">
+        <img class="grade__img grade__img--final" src="https://img.youtube.com/vi/gaB0KQ_1f5s/maxresdefault.jpg" alt="" loading="lazy">
+        <div class="grade__final" id="gradeFinal">
+          <img class="grade__img grade__img--raw" src="https://img.youtube.com/vi/gaB0KQ_1f5s/maxresdefault.jpg" alt="A frame from the OVO Café edit, raw on the left and color graded on the right" loading="lazy">
+        </div>
+        <span class="grade__tag grade__tag--raw" aria-hidden="true">Raw</span>
+        <span class="grade__tag grade__tag--final" aria-hidden="true">Graded</span>
+        <div class="grade__handle" id="gradeHandle" role="slider" tabindex="0" aria-label="Drag to compare raw footage against the graded final cut" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <span class="grade__grip" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 6v12M15 6v12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </span>
+        </div>
+      </div>
+      <p class="grade__caption">Drag to compare, a real frame before and after the grade.</p>
+    </div>
   </div>
 </section>
 

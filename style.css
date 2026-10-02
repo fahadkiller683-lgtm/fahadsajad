@@ -1,8 +1,42 @@
 /* ==========================================================================
-   FAHAD SAJAD — EDITOR PORTFOLIO
-   Design: minimal editorial — dark ground, bold light type,
+   FAHAD SAJAD - EDITOR PORTFOLIO
+   Design: minimal editorial - dark ground, bold light type,
    numbered section labels, tag chips.
    ========================================================================== */
+
+/* ---------------- Self-hosted fonts (no external font CDN) ---------------- */
+@font-face{
+  font-family:'Archivo'; font-style:normal; font-weight:500; font-display:swap;
+  src:url('fonts/archivo-500.woff2') format('woff2');
+}
+@font-face{
+  font-family:'Archivo'; font-style:normal; font-weight:700; font-display:swap;
+  src:url('fonts/archivo-700.woff2') format('woff2');
+}
+@font-face{
+  font-family:'Archivo'; font-style:normal; font-weight:900; font-display:swap;
+  src:url('fonts/archivo-900.woff2') format('woff2');
+}
+@font-face{
+  font-family:'Hanken Grotesk'; font-style:normal; font-weight:400; font-display:swap;
+  src:url('fonts/hanken-grotesk-400.woff2') format('woff2');
+}
+@font-face{
+  font-family:'Hanken Grotesk'; font-style:normal; font-weight:500; font-display:swap;
+  src:url('fonts/hanken-grotesk-500.woff2') format('woff2');
+}
+@font-face{
+  font-family:'Hanken Grotesk'; font-style:normal; font-weight:600; font-display:swap;
+  src:url('fonts/hanken-grotesk-600.woff2') format('woff2');
+}
+@font-face{
+  font-family:'JetBrains Mono'; font-style:normal; font-weight:400; font-display:swap;
+  src:url('fonts/jetbrains-mono-400.woff2') format('woff2');
+}
+@font-face{
+  font-family:'JetBrains Mono'; font-style:normal; font-weight:500; font-display:swap;
+  src:url('fonts/jetbrains-mono-500.woff2') format('woff2');
+}
 
 :root{
   --bg:        #121110;
@@ -15,7 +49,7 @@
   --chip-text: #14130f;
 
   --f-display: 'Archivo', sans-serif;
-  --f-body:    'Inter', sans-serif;
+  --f-body:    'Hanken Grotesk', sans-serif;
   --f-mono:    'JetBrains Mono', monospace;
 
   --ease: cubic-bezier(.16,.84,.44,1);
@@ -413,6 +447,7 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; color
 .hero__cta:hover,
 .hero__cta:focus-visible{ transform:scale(1.04); opacity:.9; }
 .hero__cta-arrow{ display:inline-block; transition:transform var(--dur-s) var(--ease); }
+.hero__cta-arrow svg{ display:block; width:16px; height:16px; }
 .hero__cta:hover .hero__cta-arrow,
 .hero__cta:focus-visible .hero__cta-arrow{ transform:translateX(5px); }
 
@@ -694,6 +729,7 @@ a.fact__value:focus-visible{ color:var(--ink-dim); }
   background:linear-gradient(to top, rgba(20,19,15,.55), transparent 45%);
   pointer-events:none;
 }
+.card__play svg{ width:18px; height:18px; margin-left:2px; }
 .card__play{
   position:relative;
   z-index:2;
@@ -812,7 +848,8 @@ a.fact__value:focus-visible{ color:var(--ink-dim); }
   font-size:.75rem;
   color:var(--ink-faint);
 }
-.footer__top{ color:var(--ink-dim); transition:color var(--dur-s) var(--ease); }
+.footer__top{ display:inline-flex; align-items:center; gap:.4rem; color:var(--ink-dim); transition:color var(--dur-s) var(--ease); }
+.footer__top svg{ display:block; }
 .footer__top:hover,
 .footer__top:focus-visible{ color:var(--ink); }
 

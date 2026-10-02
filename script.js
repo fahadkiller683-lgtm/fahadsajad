@@ -48,29 +48,17 @@
     revealEls.forEach(el => el.classList.add('is-visible'));
   }
 
-  /* ---------- Project cards: auto-generate YouTube thumbnails ----------
+  /* ---------- Project cards: read the YouTube ID ----------
      Each project card only needs a YouTube link in its
-     data-youtube="..." attribute (see index.html). This code reads
-     that link, pulls out the video ID, and sets the card's thumbnail
-     image automatically (from YouTube's own image API). If the link
-     hasn't been filled in yet, the card just keeps its placeholder
-     color and does nothing else — no errors. */
+     data-youtube="..." attribute (see index.html). Cards show their
+     brand-gradient placeholder color always (no raw YouTube thumbnail
+     image) — this just extracts the video ID so the click-to-play
+     modal below knows what to open. */
   function getYouTubeId(url) {
     if (!url) return null;
     const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|shorts\/))([a-zA-Z0-9_-]{11})/);
     return match ? match[1] : null;
   }
-
-  document.querySelectorAll('.card[data-youtube]').forEach(card => {
-    const link = card.getAttribute('data-youtube');
-    const videoId = getYouTubeId(link);
-    if (!videoId) return; // still a placeholder — leave the fallback color in place
-
-    const frameBg = card.querySelector('.card__frame-bg');
-    if (frameBg) {
-      frameBg.style.backgroundImage = `url(https://img.youtube.com/vi/${videoId}/maxresdefault.jpg)`;
-    }
-  });
 
   /* ---------- Video modal / lightbox ----------
      Clicking a project card opens its YouTube video in an on-page
